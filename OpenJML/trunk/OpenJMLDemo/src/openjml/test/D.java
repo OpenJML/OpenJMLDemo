@@ -3,6 +3,7 @@ package openjml.test;
 import java.util.LinkedList;
 import java.util.List;
 
+/*@ nullable_by_default */
 public class D {
 
 	  public static void main(String[] args) {
@@ -16,6 +17,10 @@ public class D {
 		  Integer x = i.get(0);
 		  System.out.println(x);
 		  //System.out.println("END");
+	  }
+	  
+	  public void m(Object o) {
+		  /*@ non_null */ Object oo = o;
 	  }
 
 

@@ -4,15 +4,15 @@ import java.io.FileNotFoundException;
 
 public class Paths {
 	
-	//@ old boolean p1 = i < min;
+	//@ requires min <= max;
 	//@ {|
-	//@   requires p1;
+	//@   requires i < min;
 	//@   ensures \result == min;
 	//@ also
 	//@   requires i > max;
 	//@   ensures \result == max;
 	//@ also
-	//@   requires !p1 && i <= max;
+	//@   requires i >= min && i <= max;
 	//@   ensures \result == i;
 	//@ |}
 	public int clip(int i, int max, int min) {
@@ -33,9 +33,9 @@ public class Paths {
 		int k = 0; int j = 1;
 		switch (i) {
 		default: k = i; break;
-		case 1: k = 1;
-		case 2: k = 2;
-		case 3: k = 3;
+		case 1: k = 1; break;
+		case 2: k = 2; break;
+		case 3: k = 3; break;
 		}
 		//@ assert i == k;
 		
@@ -51,7 +51,7 @@ public class Paths {
 		} finally {
 			i += k;
 		}
-		//@ assert i == 2*k;
+		//@ assert false;
 	}
 		
 }
