@@ -2,7 +2,7 @@
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <stringAttribute key="bad_container_name" value="\RacProject\launcher"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/OpenJMLDemo/src-rac/test/A.java"/>
+<listEntry value="/OpenJMLDemo/src-rac/test/A.jml"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>

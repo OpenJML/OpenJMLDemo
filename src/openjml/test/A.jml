@@ -1,0 +1,7 @@
+public class J {
+	
+	public int m();
+	 
+	final int z;
+	
+}
