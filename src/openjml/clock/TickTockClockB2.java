@@ -3,24 +3,21 @@
 // Issue with evaluating a method inside an \old 
 
 package openjml.clock;
-public class TickTockClockA1 {
+public class TickTockClockB2 {
     //@ public model JMLDataGroup _time_state;
 
-	//@ protected invariant 0 <= hour && hour <= 23;
-	//@ spec_public
-	protected int hour; //@ in _time_state;
+	//@ public invariant 0 <= hour && hour <= 23;
+	public int hour; //@ in _time_state;
 
-	//@ protected invariant 0 <= minute && minute <= 59;
-	//@ spec_public
-	protected int minute; //@ in _time_state;
+	//@ public invariant 0 <= minute && minute <= 59;
+	public int minute; //@ in _time_state;
 
-	//@ protected invariant 0 <= second && second <= 59;
-	//@ spec_public
-	protected int second; //@ in _time_state;
+	//@ public invariant 0 <= second && second <= 59;
+	public int second; //@ in _time_state;
 
 	//@ assignable _time_state; 
 	//@ ensures getHour() == 12 && getMinute() == 0 && getSecond() == 0;
-	public /*@ pure @*/ TickTockClockA1() {
+	public /*@ pure @*/ TickTockClockB2() {
 		hour = 12; minute = 0; second = 0;
 	}
 
@@ -55,7 +52,7 @@ public class TickTockClockA1 {
       @*/
 	public void tick() {
 		second++;
-		if (second == 60) { second = 0; minute++; /*  @ ghost int s = (\lbl SECOND getSecond()); */ }
+		if (second == 60) { minute++; /*@ ghost int s = (\lbl SECOND getSecond()); */ }
 		if (minute == 60) { minute = 0; hour++; }
 		if (hour == 24) { hour = 0; }
 	}

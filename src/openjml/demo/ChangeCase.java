@@ -1,9 +1,7 @@
-package openjml.test;
+package openjml.demo;
 
-public class Path2 {
+public class ChangeCase {
 	
-	//@ invariant true;
-
 	//@   requires c >= 'A' && c <= 'Z';
 	//@   ensures \result >= 'a' && \result <= 'z';
 	//@ also
@@ -20,19 +18,12 @@ public class Path2 {
 			result =  (char)(c - 'A' + 'a');
 		} else if (c > 'z') {
 			result =  c;
-		} else if (c > 'a') {
+		} else if (c >= 'a') {
 			result =  (char)(c - 'a' + 'A');
 		} else {
 			result = c;
 		}
 		return result;
 	}
-	 
-	public void other(int i) {
-		//@ assert i == 0;
-	}
-	
-	static public class Y {}
-}
 
-class Z {}
+}
