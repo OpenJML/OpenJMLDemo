@@ -53,5 +53,14 @@ public class Paths {
 		}
 		//@ assert false;
 	}
+	
+	public void testConstant(/*@ nullable */Object o) {
+		o = this;
+		//@ assert o == this;
+		o = new RuntimeException();
+		//@ assert \typeof(o) <: \type(Exception);
+		o = null;
+		//@ assert o != null;
+	}
 		
 }
