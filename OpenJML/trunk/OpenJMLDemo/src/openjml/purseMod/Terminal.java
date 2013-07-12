@@ -24,6 +24,7 @@ class Terminal {
       
        // all elements in pin between 0 and pin_pos are digits 
       public invariant (\forall int i; 0 <= i && i < pin_pos; 0 <= pin[i] && pin[i] <= 9);  
+      public invariant (\forall int i; pin_pos <= i && i < pin.length; pin[i] == -1);  
       
        // pin_pos always points to position within the pin code
        public invariant 0 <= pin_pos && pin_pos <= pin.length;
@@ -46,6 +47,9 @@ class Terminal {
         public static final ghost int FILLED_INIT = 2;
         public static final ghost int FILLED_READYFORINIT = 3;
            
+           // FIXME - should be automatic for final variables
+        public static invariant EMPTY==0 && FILLED_UNINIT==1 && FILLED_INIT==2 && FILLED_READYFORINIT==3;
+        
         public ghost int status = EMPTY;
         
 
@@ -79,13 +83,14 @@ class Terminal {
 	/*@ ensures (\forall int i; 0 <= i && i < pin.length; pin[i] == -1);
         ensures pin_pos == 0;
         ensures status == EMPTY;
-        assignable \everything;
+
+        assignable ownerid, pin[*], status;
         signals (Exception) false;
 	 */
 	public Terminal(int ownerid){
 		this.ownerid=ownerid;
 		/*@ loop_invariant i>=0 && i<=pin.length && (\forall int j; j>=0 && j<i; pin[j] == -1); */
-		for(int i=0;i<8;i++) pin[i]=-1;
+		for(int i=0;i<pin.length;i++) pin[i]=-1;
 		//@ set status = EMPTY;
 	}
   
@@ -97,6 +102,7 @@ class Terminal {
 	// of clearPin()
 	/*@ requires card != null;
         requires status == EMPTY;
+        assignable this.card, this.pin_pos, this.pin[*];
         ensures this.card == card;
         ensures card.status == Card.UNINIT ==> status == FILLED_UNINIT;
         ensures card.status != Card.UNINIT ==> status == FILLED_INIT;
@@ -115,6 +121,8 @@ class Terminal {
 	// method will not throw an exception
 	/*@ requires 0 <= digit && digit <= 9;
         requires pin_pos < pin.length;
+        requires card != null;
+        assignable pin_pos, pin[pin_pos], status;
         ensures (\forall int i; 0 <= i && i < pin.length; 
                        i == \old(pin_pos)? pin[i] == digit : pin[i] == \old(pin[i]));
         ensures pin_pos == \old(pin_pos) + 1;
@@ -137,12 +145,15 @@ class Terminal {
 	// method will not throw an exception
 	
 
-	/*@ ensures (\forall int i; 0 <= i && i < pin.length; pin[i] == -1);
+	/*@ requires pin_pos == pin.length;
+	    assignable pin_pos, pin[*];
+	    ensures (\forall int i; 0 <= i && i < pin.length; pin[i] == -1);
         ensures pin_pos == 0;
         ensures status == \old(status);
       	signals (Exception) false;
 	 */
 	public void clearPin(){
+		//@ loop_invariant pin_pos >=0 && (\forall int i; pin_pos<=i && i<\old(pin_pos); pin[i]==-1);
 		while(pin_pos>0){
 			pin_pos--;
 			pin[pin_pos]=-1;

@@ -1,6 +1,8 @@
 
 
 class Token {
+	//@ public model Object state;
+	
 	//private 
 	/*@ spec_public */ int amount;  // the value of the token.
 	//@ public invariant amount >= 0;
@@ -11,9 +13,9 @@ class Token {
 	int tokenid; // a unique id meant to avoid accepting a token more than once.
 	
 	//private 
-	int sig;     // cryptographic signature.
+	int sig; //@ in state;     // cryptographic signature.
 	//private 
-	/*@ spec_public */ boolean signed;
+	/*@ spec_public */ boolean signed; //@ in state; 
 	
 	// life cycle of token
 	// it has to be signed, before it can be checked
@@ -21,8 +23,13 @@ class Token {
 	
 	/*@ public static final ghost int UNINIT = 0;
 	    public static final ghost int SIGNED = 1;
+	    public static final ghost int BLOCKED = 2;
+	    public static final ghost int TEMP_BLOCKED = 3;
+	    public static final ghost int ACTIVE = 4;
 	    
-	    public ghost int status = UNINIT;
+	    public static invariant UNINIT==0 && SIGNED==1 && BLOCKED==2 && TEMP_BLOCKED==3 && ACTIVE==4;
+	    
+	    public ghost int status = UNINIT; //@ in state; 
 	
 	    public invariant status == UNINIT || status == SIGNED;
 	    
@@ -34,11 +41,11 @@ class Token {
 	 */
   
 	//@ ensures \result == amount;
-	public /*@ pure */ int getAmount(){ return amount; }
+	public /*@ pure helper */ int getAmount(){ return amount; }
 	
-	public /*@ pure */ int getOwner(){ return ownerid; }
+	public /*@ pure helper */ int getOwner(){ return ownerid; }
 	
-	public /*@ pure */ int getTokenID(){ return tokenid; }
+	public /*@ pure helper */ int getTokenID(){ return tokenid; }
 	
 	//@ requires amount >= 0;
 	//@ ensures status == UNINIT;
@@ -57,6 +64,7 @@ class Token {
 	
 	//@ requires status == UNINIT;
 	//@ requires key2 != 0;
+	//@ assignable state;
 	//@ ensures status == SIGNED;
 	//@ ensures check(key1, key2);
 	//@ signals (Exception) false;

@@ -3,26 +3,31 @@
 import java.util.Random;
 
 final class Card {
-	  // private
-	  /*@ spec_public */ int master_attempts=0;
+	//@ public model Object state;
+
+	// private
+	  /*@ spec_public */ int master_attempts=0; //@ in state;
 	  // private 
-	  /*@ spec_public */ int basic_attempts=0;
+	  /*@ spec_public */ int basic_attempts=0; //@ in state;
 	  //private 
-	  /*@ spec_public */ byte master_pin[]=new byte[8];
+	  /*@ spec_public */ byte master_pin[]=new byte[8]; //@ in state;
 	  //private 
-	  /*@ spec_public */ byte basic_pin[]=new byte[4];
+	  /*@ spec_public */ byte basic_pin[]=new byte[4]; //@ in state;
 	  //private
-	  Random random=new Random(0);
+	  Random random=new Random(0); //@ in state;
 	  //private 
-	  /*@ spec_public */ int cardid=random.nextInt();
+	  /*@ spec_public */ int cardid=random.nextInt(); //@ in state;
 	  // error 2
 	  // fix 2 private /*@ spec_public */ int amount=-1;
 	  //private 
-	  /*@ spec_public */ int amount=0;
+	  /*@ spec_public */ int amount=0; //@ in state;
 	  //private 
 	  static final int key1=12944557;
 	  //private
 	  static final int key2=254557;
+	  
+	  //@ ensures \result == (0<=i && i<=9);
+	  //@ public static pure helper model boolean inrange(int i) { return 0<=i && i<=9; }
 	  
 	  // invariants
 	  
@@ -37,9 +42,9 @@ final class Card {
 	      
 	      // once the card is initialized, the pins only contain digits (between 0 and 9)
 	      public invariant status != UNINIT ==>
-	                (\forall int i; 0 <= i && i < master_pin.length; 0 <= master_pin[i] && master_pin[i] <= 9);
+	                (\forall int i; 0 <= i && i < master_pin.length; inrange(master_pin[i]));
 	      public invariant status != UNINIT ==>
-	                (\forall int i; 0 <= i && i < basic_pin.length; 0 <= basic_pin[i] && basic_pin[i] <= 9); 
+	                (\forall int i; 0 <= i && i < basic_pin.length; inrange(basic_pin[i])); 
 	   
 	      // amount on card is never negative
 	      public invariant amount >= 0;
@@ -63,6 +68,8 @@ final class Card {
 	   	    public static final ghost int ACTIVE = 1;
 	   	    public static final ghost int TEMP_BLOCKED = 2;
 	   	    public static final ghost int BLOCKED = 3;
+	   	    
+		    public static invariant UNINIT == 0 && BLOCKED == 3 && TEMP_BLOCKED == 2 && ACTIVE == 1;
 	   	    
 	   	    public ghost int status = UNINIT;
 	   	       	    
@@ -147,18 +154,22 @@ final class Card {
 	    
 	    // after construction, the card is still uninitialised
 	    // constructor will not throw an exception
-	    /*@ ensures (\forall int i; 0 <= i && i < basic_pin.length; basic_pin[i] == -1); 
-	        ensures (\forall int i; 0 <= i && i < basic_pin.length; basic_pin[i] == -1);
+	    /*@ assignable basic_pin[*], master_pin[*], this.state;
+	        ensures (\forall int i; 0 <= i && i < basic_pin.length; basic_pin[i] == -1); 
+	        ensures (\forall int i; 0 <= i && i < master_pin.length; master_pin[i] == -1);
 	        ensures status == UNINIT; 
+	        ensures basic_pin == \old(basic_pin) && master_pin == \old(master_pin);
+	        ensures master_attempts==0 && basic_attempts == 0 && amount == 0;
 	        signals (Exception) false;     
 	     */
 	    public Card(){
 	    	// error 1
 	    	// fix 1 for(int i=0;i<8;i++) this.basic_pin[i]=-1;
 	    	// fix 1 for(int i=0;i<4;i++) this.master_pin[i]=-1;
+	    	//@ loop_invariant 0<=i && i<= basic_pin.length && (\forall int j; 0<=j && j<i; basic_pin[j]==-1);
 	        for(int i=0;i<basic_pin.length;i++) this.basic_pin[i]=-1;
+	    	//@ loop_invariant 0<=i && i<= master_pin.length && (\forall int j; 0<=j && j<i; master_pin[j]==-1);
 	    	for(int i=0;i<master_pin.length;i++) this.master_pin[i]=-1;
-	    	//@ set status = UNINIT;
 	    }
 	  
 	    // look up functions
@@ -186,21 +197,32 @@ final class Card {
 	        requires basic_pin != null && master_pin != null;
 	        requires this.basic_pin.length <= basic_pin.length;
 	        requires this.master_pin.length <= master_pin.length;
-	        requires (\forall int i; 0 <= i && i < this.basic_pin.length; 0 <= basic_pin[i] && basic_pin[i] <= 9);
-	        requires (\forall int i; 0 <= i && i < this.master_pin.length; 0 <= master_pin[i] && master_pin[i] <= 9);
+	        requires (\forall int i; 0 <= i && i < this.basic_pin.length; inrange(basic_pin[i]));
+	        requires (\forall int i; 0 <= i && i < this.master_pin.length; inrange(master_pin[i]));
+	        assignable this.basic_pin[*], this.master_pin[*], this.status, this.master_attempts, this.basic_attempts;
 	        ensures  (\forall int i; 0 <= i && i < this.basic_pin.length; this.basic_pin[i] == basic_pin[i]);
 	        ensures  (\forall int i; 0 <= i && i < this.master_pin.length; this.master_pin[i] == master_pin[i]);
 	        ensures status == ACTIVE;
 	        signals (Exception) false;
 	     */
 	    public void CardInit(byte basic_pin[],byte master_pin[]) throws CardException {
-	    	for(int i=0;i<4;i++){
+	    	//@ loop_invariant 0<=i && i<=this.basic_pin.length && (\forall int j; 0<=j && j<i; this.basic_pin[j] == basic_pin[j]);
+	    	//@ loop_invariant 0<=i && i<=this.basic_pin.length && (\forall int j; 0<=j && j<i; inrange(this.basic_pin[j]));
+	    	for(int i=0;i<this.basic_pin.length;i++){
+	    		//@ assert inrange(basic_pin[i]);
 	    		this.basic_pin[i]=basic_pin[i];
+	    		//@ assert inrange(this.basic_pin[i]);
 	    	}
-	    	for(int i=0;i<8;i++){
+	    	//@ loop_invariant 0<=i && i<=this.master_pin.length && (\forall int j; 0<=j && j<i; this.master_pin[j] == master_pin[j]);
+	    	//@ loop_invariant 0<=i && i<=this.master_pin.length && (\forall int j; 0<=j && j<i; inrange(this.master_pin[j]));
+	    	for(int i=0;i<this.master_pin.length;i++){
+	    		//@ assert inrange(master_pin[i]);
 	    		this.master_pin[i]=master_pin[i];
+	    		//@ assert inrange(this.master_pin[i]);
 	    	}
 	    	//@ set status = ACTIVE;
+	    	master_attempts = 0; // These have to be either initialized or required, else the invariant implied by status==ACTIVE cannot be established
+	    	basic_attempts = 0;
 	    }
 	  
 	    // append is called on an array where all non-null values are stores consecutively as the initial fragment
@@ -260,9 +282,15 @@ final class Card {
 	        signals (Exception) false;     
 	     */
 	    public /*@ pure*/ static boolean tokenid_occurs(Token[] array, int tokenid){
+	    	//@ ghost int k = 0;
+	    	//@ loop_invariant i == k && 0<=i && i<=array.length && (\forall int j; 0<=j && j <i; array[j] != null && array[j].getTokenID() != tokenid);
 	    	for(int i=0;i<array.length&&array[i]!=null;i++){
 	    		if (array[i].getTokenID()==tokenid) return true;
-	    	}	
+	    		//@ set k = k + 1;
+	    	}
+	    	//@ assert 0 <= k && k <= array.length;
+	    	//@ assert (\forall int j; 0<=j && j <k; array[j] != null && array[j].getTokenID() != tokenid);
+	    	//@ assert k == array.length || array[k] == null;
 	    	return false;
 	    }
 	  
@@ -345,7 +373,8 @@ final class Card {
 	    	// fix 7		throw new CardException("invalid pin");
 	    	// fix 7	}
 	    	// fix 7}
-	    	for(int i=0;i<4;i++){
+	    	//@ loop_invariant 0<=i && i < basic_pin.length && (\forall int j; 0<=j && j<i; this.basic_pin[j]!=basic_pin[j]);
+	    	for(int i=0;i<basic_pin.length;i++){
 	    		if (this.basic_pin[i]!=basic_pin[i]) {
 	    			basic_attempts++;
 	    	    	if (basic_attempts==3) {
@@ -380,6 +409,7 @@ final class Card {
 	    /*@ requires status == TEMP_BLOCKED;
 	        requires master_pin != null && master_pin.length >= this.master_pin.length;
 	        requires (\forall int i; 0 <= i && i < this.master_pin.length; 0 <= master_pin[i] && master_pin[i] <= 9);
+	        assignable basic_attempts, master_attempts, status;
 	        ensures status == ACTIVE;
 	        ensures (\forall int i; 0 <= i && i < this.master_pin.length; master_pin[i] == this.master_pin[i]);
 	        ensures basic_attempts == 0;
@@ -399,10 +429,11 @@ final class Card {
 	    	// fix 7		throw new CardException("invalid pin");
 	    	// fix 7	}	
 	    	// fix 7 }
-	    	for(int i=0;i<8;i++){
+	    	//@ loop_invariant 0<= master_attempts && master_attempts < 3 && 0<=i && i<=master_pin.length && status == \old(status) && (\forall int j; 0<=j && j<i; this.master_pin[j] == master_pin[j]);
+	    	for(int i=0;i<master_pin.length;i++){
 	    		if (this.master_pin[i]!=master_pin[i]){
 	    			master_attempts++;
-	    	    	if(master_attempts>3) {
+	    	    	if(master_attempts>=3) {
 	    	    		//@ set status = BLOCKED;
 	    	    		throw new CardException("card is voided");
 	    	    	} else {		
