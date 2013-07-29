@@ -1,0 +1,103 @@
+Notes on examples:
+
+ESC:
+
+* OpenJMLDemo/misc1/EscTest
+-- still has an issue with one method, but does not crash - likely needs handling of pure methods as functions within SMT
+
+* testfiles/LoopExercises
+-- SUCCESS on z3_4_3
+-- solver HANGS on cvc4
+
+* testfiles/bag, bagModified
+-- bag produces lots of warnings
+-- bagModified is an edited version of bag (code and specification corrections) that
+   now proves SUCCESSFULLY
+   [ Investigate: more complete specifications; handling of assignments to a 
+     newly allocated array is correct.]
+
+* OpenJMLDemo/src/openjml/purse, purse_mod
+-- BUG: Purse, PurseMod, PurseMod2 hang up, even with some methods excluded
+
+* TickTockClock
+-- OK (but needs review)
+
+verifyThis - Challenges from www.verifyThis.org
+ * BinarySearch (the "Binary Search in an array" problem)
+ -- proves but there are some anomalies to check
+ 
+ * Customer (the "Bakery Protocol" problem)
+ -- not yet attempted
+ 
+ * InvertInjection (the "Inverting an Injection" problem)
+ -- SUCCESSFUL
+ 
+ * LinkedListSearch (the "Searching a Linked List" problem)
+ -- needs notation for pointer structures
+ 
+ * MaxByElimination (the "Maximum in an array (by elimination)" problem)
+ -- SUCCESSFUL
+ 
+ * SumAndMax (the "Sum and Maximum" problem)
+ -- needs the ability to reason about \sum etc. quantifiers
+    proves OK when \max is replaced by \forall and \exists
+ 
+ 
+
+
+RAC:
+
+* testfiles/firstTest
+-- SUCCESS
+
+* testfiles/uniqueList
+-- BUG: OpenJML crashes when an invariant has a quantified expression, in RAC
+-- SUCCESS: UniqueListBug2 is not a bug but shows a case in which a coding error is outed by the specs
+
+* OpenJMLDemo/src/openjml/purse, purse_mod
+-- BUG: RAC crashes (purseCardtest, purseModTest)
+
+* OpenJMLDemo/src/openjml/student
+-- SUCCESS
+
+* testfiles/sv_rac.Decimal, testfiles/sv_rac_mod.Decimal
+-- SUCCESS
+
+
+5/29: 
+
+== problem 1: model fields in interfaces with constants
+
+public interface ModelField {
+    //@ public model int model_field;
+    public static int model_value=481;
+}
+
+complains about:
+
+The field model_field in the specification matches a Java field ModelField.model_field with different modifiers: static
+
+
+== problem 2: previous errors are kept.
+
+If the prover is rerun then the old errors are removed from the "Problems" list.
+If the prover crashes then this crash message is added to the "Problems"
+list and all old errors are kept.
+
+and mine:
+
+== problem 3: visibility of quantified variables
+
+When I say "\forall int i; f(i);" in, say, an invariant, OpenJML assumes package visibility for i and checks it with the surrounding visibility of the JML construct, and complains. It should not do that I think, there is no way we can change visibility of i, it should be accepted for all constructs from private to public.
+
+== problem 4: arithmetic expressions over short/byte still do not work, I checked only with RAC.
+
+== problem 5: RAC compiling an empty class (stub exception class) gave me an exception stack trace, see below.
+
+== problem 6: General - although we can do some ESC-ing now, we still find the results weird or not understandable. As an example attached is the Amount class from the set of standard ESC/Java2 exercises that does not check out with OpenJML. I do understand that some things would be due to arithmetics, but there are other problems reported by OpenJML that are certainly due to something much simpler that we cannot figure out.
+
+== problem 7: More of a question: we were not able to figure out what the default assignable for a constructor is. In our example the code without assignable could be checked, adding any assignable brings problems in, different problems depending on the actual assignable. See the attached FirstTest.java. 
+
+
+
+
