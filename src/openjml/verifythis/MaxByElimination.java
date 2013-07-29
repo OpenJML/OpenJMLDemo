@@ -7,6 +7,7 @@ public class MaxByElimination {
 		int y = a.length-1;
 
 		//@ loop_invariant x <= y && 0 <= x && y < a.length;
+		// So far either a[y] is the largest or a[x] is the largest of everything beyond x and beyond y (not including a[x] and a[y])
 		/*@ loop_invariant ((\forall int i; 0<=i && i<x; a[i] <= a[y]) && (\forall int i; y <= i && i < a.length; a[i] <= a[y]))
 	                   ||  ((\forall int i; 0<=i && i<=x; a[i] <= a[x]) && (\forall int i; y < i && i < a.length; a[i] <= a[x]));
 	     */	
