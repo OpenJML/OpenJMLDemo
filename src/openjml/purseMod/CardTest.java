@@ -8,7 +8,7 @@ public class CardTest {
 	public static void main(String[] args) {
 
 		// declare variables
-		int owner = 23; 
+		int owner = 23;
 		Terminal terminal = new Terminal(owner);
 		Card card = new Card();
 		
@@ -37,7 +37,6 @@ public class CardTest {
 		// rerun and continue
 		
 		// insert card in terminal
-		
 		terminal.insertCard(card);
 		
         // note there is an error in clearPin(), called in insertCard(), but this is not detected here,
@@ -55,7 +54,7 @@ public class CardTest {
 		for (int i = 0; i < 16; i++) {
 			try {terminal.load(i);} catch (Exception e) {};
 		} 
-		
+
 		// Error 3 detected
 		// JMLInternalNormalPostconditionError: by method Token.sign
 		// at purse.Token.sign(CardTest.java:1330)
@@ -70,7 +69,7 @@ public class CardTest {
 		
 		// make 17th load, loaded array should be expanded
 		try {terminal.load(24);} catch (Exception e) {};
-		
+
 		// Error 4 detected
 		// JMLInternalExceptionalPostconditionError: by method Card.append regarding specifications at
 		// File "..\..\..\workspace\Assignment 1\src\purse\CardTest.java", line 211, character 43, when
@@ -87,7 +86,7 @@ public class CardTest {
 		
 		// make payment
 		try {terminal.pay(26);} catch (Exception e) {};
-		
+
 		// Error 5 detected
 		
 		// JMLInternalNormalPostconditionError: by method Card.pay

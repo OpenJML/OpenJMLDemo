@@ -24,7 +24,7 @@ ESC:
 
 verifyThis - Challenges from www.verifyThis.org
  * BinarySearch (the "Binary Search in an array" problem)
- -- proves but there are some anomalies to check
+ -- SUCCESSFUL
  
  * Customer (the "Bakery Protocol" problem)
  -- not yet attempted
@@ -55,7 +55,7 @@ RAC:
 -- SUCCESS: UniqueListBug2 is not a bug but shows a case in which a coding error is outed by the specs
 
 * OpenJMLDemo/src/openjml/purse, purse_mod
--- BUG: RAC crashes (purseCardtest, purseModTest)
+-- BUG: RAC crashes (racfiles/purseCardtest, purseModTest)
 
 * OpenJMLDemo/src/openjml/student
 -- SUCCESS
