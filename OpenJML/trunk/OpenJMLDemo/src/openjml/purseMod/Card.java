@@ -13,7 +13,13 @@ final class Card {
 	  /*@ spec_public */ byte master_pin[]=new byte[8]; //@ in state;
 	  //private 
 	  /*@ spec_public */ byte basic_pin[]=new byte[4]; //@ in state;
-	  //private
+
+	  	//private 
+	  	/*@ spec_public */ Token loaded[]=new Token[16];   
+	    //private 
+	    /*@ spec_public */ Token payed[]=new Token[16];
+	    
+	    //private
 	  Random random=new Random(0); //@ in state;
 	  //private 
 	  /*@ spec_public */ int cardid=random.nextInt(); //@ in state;
@@ -91,11 +97,6 @@ final class Card {
 	                                                      
 	   	 */
 	  
-	  	//private 
-	  	/*@ spec_public */ Token loaded[]=new Token[16];   
-	    //private 
-	    /*@ spec_public */ Token payed[]=new Token[16];
-	    
 	    // requirements on loaded and payed
 	    /*@ public invariant loaded != null;
 	        public invariant payed != null;
@@ -139,7 +140,7 @@ final class Card {
 	                      loaded[i] != null ==>                              
 	                      (\forall int k; 0 <= k && k < payed.length;
 	                          payed[k] != null ==>
-	                             loaded[i].getTokenID() != payed[k].getTokenID()));
+	                             payed[i].getTokenID() != payed[k].getTokenID())); // NOTE -- the first 'payed' was 'loaded'
 	        */
 
 	    
@@ -158,7 +159,7 @@ final class Card {
 	        ensures (\forall int i; 0 <= i && i < basic_pin.length; basic_pin[i] == -1); 
 	        ensures (\forall int i; 0 <= i && i < master_pin.length; master_pin[i] == -1);
 	        ensures status == UNINIT; 
-	        ensures basic_pin == \old(basic_pin) && master_pin == \old(master_pin);
+	        // ILLEGAL postcondition: ensures basic_pin == \old(basic_pin) && master_pin == \old(master_pin);
 	        ensures master_attempts==0 && basic_attempts == 0 && amount == 0;
 	        signals (Exception) false;     
 	     */
@@ -239,6 +240,7 @@ final class Card {
 	        requires (\exists int i; 0 <= i && i <= array.length;
 	                     (\forall int j; 0 <= j && j < i; array[j] != null) &&
 	                     (\forall int k; i <= k && k < array.length; array[k] == null));
+	        assignable array[*];
 	        ensures (\exists int i; 0 <= i && i < \result.length;
 	                     (\forall int j; 0 <= j && j < i; \result[j] != null && \result[j] == array[j]) &&
 	                     tok.equals(\result[i]) &&
@@ -246,7 +248,7 @@ final class Card {
 	        ensures array.length <= \result.length;
 	        ensures tokenid_occurs(\result, tok.getTokenID());
 	        signals (Exception) false;                      
-	     */
+	        */
 	    public static Token[] append(Token[] array, Token tok){
 	    	int i;
 	    	for(i=0;i<array.length;i++){
@@ -310,6 +312,7 @@ final class Card {
 	        requires tok != null;
 	        requires !tokenid_occurs(loaded, tok.getTokenID());
 	        requires !tokenid_occurs(payed, tok.getTokenID());
+	        assignable loaded, amount; // FIXME, loaded[*];
 	        ensures status == \old(status);
 	        ensures tokenid_occurs(loaded, tok.getTokenID());
 	        ensures amount == \old(amount) + tok.getAmount();

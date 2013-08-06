@@ -14,7 +14,7 @@ public class BinarySearch {
 		//@ decreases hi - lo;
 		while (lo < hi) {
 			int mid = (lo + hi) / 2;
-			//@ assume mid >= lo && mid < hi;
+			//@ assert mid >= lo && mid < hi; // Just checking the prover can do this arithmetic
 			if (a[mid] == value) return mid;
 			if (value < a[mid]) {
 				hi = mid;
@@ -25,10 +25,11 @@ public class BinarySearch {
 		return lo;
 	}
 
-	// FIXME - find() above should not validate - if hi == lo+1 and value == a[hi] and value != a[lo],
-	// then the above does not decrease hi-lo. Note that if the \exists requirement is removed, then
-	// a warning is issued about the non-decreasing
 	
+	// This version correctly fails to prove that hi-lo decreases because if
+	//   hi = lo+1 and value is not in the list (so a[lo] < value < a[hi]
+	// then mid = lo and we fall through to the else condition in which lo is assigned mid
+	// and the loop does not terminate.
 	/*@  requires a.length >= 1;
 	  @  requires (\forall int i; 0<i && i < a.length; a[i-1] <= a[i]);
 	  @  requires a[0] <= value && value <= a[a.length-1]; // Redundant, but needed to establish the loop invariant
@@ -41,7 +42,6 @@ public class BinarySearch {
 		//@ decreases hi - lo;
 		while (lo < hi) {
 			int mid = (lo + hi) / 2;
-			//@ assume mid >= lo && mid < hi;
 			if (a[mid] == value) return mid;
 			if (value < a[mid]) {
 				hi = mid;
@@ -69,7 +69,6 @@ public class BinarySearch {
 		//@ decreases hi - lo;
 		while (lo < hi) {
 			int mid = (lo + hi) / 2;
-			//@ assume mid >= lo && mid < hi;
 			if (a[mid] == value) return mid;
 			if (value < a[mid]) {
 				hi = mid;
@@ -93,7 +92,6 @@ public class BinarySearch {
 		//@ decreases hi - lo;
 		while (lo < hi) {
 			int mid = (lo + hi) / 2;
-			//@ assume mid >= lo && mid < hi;
 			if (a[mid] == value) return mid;
 			if (value < a[mid]) {
 				hi = mid;

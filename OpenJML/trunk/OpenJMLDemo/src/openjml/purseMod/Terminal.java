@@ -23,8 +23,8 @@ class Terminal {
        public constraint pin.length == \old(pin.length);
       
        // all elements in pin between 0 and pin_pos are digits 
-      public invariant (\forall int i; 0 <= i && i < pin_pos; 0 <= pin[i] && pin[i] <= 9);  
-      public invariant (\forall int i; pin_pos <= i && i < pin.length; pin[i] == -1);  
+       public invariant (\forall int i; 0 <= i && i < pin_pos; 0 <= pin[i] && pin[i] <= 9);  
+       public invariant (\forall int i; pin_pos <= i && i < pin.length; pin[i] == -1);  
       
        // pin_pos always points to position within the pin code
        public invariant 0 <= pin_pos && pin_pos <= pin.length;
@@ -102,7 +102,7 @@ class Terminal {
 	// of clearPin()
 	/*@ requires card != null;
         requires status == EMPTY;
-        assignable this.card, this.pin_pos, this.pin[*];
+        assignable this.card, this.pin_pos, this.pin[*], this.status;
         ensures this.card == card;
         ensures card.status == Card.UNINIT ==> status == FILLED_UNINIT;
         ensures card.status != Card.UNINIT ==> status == FILLED_INIT;
@@ -219,7 +219,7 @@ class Terminal {
     	signals (CardException) 
        	   status == \old(status) &&
            (\exists int i; 0 <= i && i < card.master_pin.length; pin[i] != card.master_pin[i]); 
- */
+    */
 	public void unlock() throws CardException {
 		card.unlock(pin);
 	}
