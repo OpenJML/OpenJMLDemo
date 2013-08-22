@@ -312,7 +312,7 @@ final class Card {
 	        requires tok != null;
 	        requires !tokenid_occurs(loaded, tok.getTokenID());
 	        requires !tokenid_occurs(payed, tok.getTokenID());
-	        assignable loaded, amount; // FIXME, loaded[*];
+	        assignable loaded, amount, loaded[*];
 	        ensures status == \old(status);
 	        ensures tokenid_occurs(loaded, tok.getTokenID());
 	        ensures amount == \old(amount) + tok.getAmount();
@@ -376,15 +376,15 @@ final class Card {
 	    	// fix 7		throw new CardException("invalid pin");
 	    	// fix 7	}
 	    	// fix 7}
-	    	//@ loop_invariant 0<=i && i < basic_pin.length && (\forall int j; 0<=j && j<i; this.basic_pin[j]!=basic_pin[j]);
-	    	for(int i=0;i<basic_pin.length;i++){
+	    	//@ loop_invariant 0<=i && i <= this.basic_pin.length && (\forall int j; 0<=j && j<i; this.basic_pin[j]==basic_pin[j]);
+	    	for(int i=0;i<this.basic_pin.length;i++){
 	    		if (this.basic_pin[i]!=basic_pin[i]) {
 	    			basic_attempts++;
 	    	    	if (basic_attempts==3) {
 	    	    		//@ set status = TEMP_BLOCKED;
 	    	    		throw new CardException("card is blocked");
 	    	    	} else {
-	    			throw new CardException("invalid pin");
+	    	    		throw new CardException("invalid pin");
 	    	    	}
 	    		}
 	    	}
