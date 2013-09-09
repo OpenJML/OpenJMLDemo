@@ -28,7 +28,7 @@ abstract class BeanCan {
     /*@ normal_behavior
         requires (color == WHITE) ==> num_white > 0;
         requires (color == BLACK) ==> num_black > 0;
-        requires (num_black + num_white >= 1);
+        requires num_black + num_white >= 1;
         modifies num_black, num_white;
         ensures num_white == 
                     ((color == WHITE) ? \old(num_white) - 1 : \old(num_white));
@@ -65,9 +65,6 @@ abstract class BeanCan {
         //@ loop_invariant num_black >= 0;
         //@ loop_invariant num_white >= 0;
         //@ decreases num_black + num_white;
-//    	//@ loop_invariant num_black <= \old(num_black);
-//    	//@ loop_invariant num_white <= \old(num_white);
-    	
 	while (num_black + num_white > 1) {
 	    boolean bean1 = pick_random();
         //@ assert (bean1 == WHITE) ==> num_white > 0;
