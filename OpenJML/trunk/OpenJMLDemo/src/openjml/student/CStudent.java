@@ -1,9 +1,9 @@
 
 class CStudent implements Student {
 
-    private String name;
-    private int credits;
-    private int status;
+	/*@ spec_public */ private String name;
+    /*@ spec_public */ private int credits;
+    /*@ spec_public */ private int status;
     /*@ spec_public */ private boolean active;
 
     /*@ requires c >= 0;
