@@ -18,6 +18,11 @@
 /* model the time for the transactions*/
 public class Time extends Object{
 
+	//@ ensures time == 0;
+	public Time() {
+		hour = 0;
+		minute = 0;
+	}
 
 	//@ public model int time;
 	//@ represents time <- hour * 60 + minute;
@@ -35,14 +40,15 @@ public class Time extends Object{
 	 	public constraint time >= \old(time);
 	 */
 	
-	private /*@ spec_public @*/ byte hour;
-	private /*@ spec_public @*/ byte minute;
+	private /*@ spec_public @*/ byte hour; //@ in time;
+	private /*@ spec_public @*/ byte minute; //@ in time;
 
 	/*@
 	 	requires h >= getHour();
 	 	requires m >= getMinute();
 	 	requires 0 <= m && m < 60;
 	 	requires 0 <= h && h < 24;
+	 	assignable time;
 		ensures time == h * 60 + m;
 	 */
 	public void setTime(byte h, byte m) {
@@ -54,6 +60,7 @@ public class Time extends Object{
 	  	requires h != null;
 	  	requires h.getHour() >= getHour();
 	  	requires h.getMinute() >= getMinute();
+	  	assignable time;
 	  	ensures this.time == h.time;
 	 */
 	public void setTime(Time h) {
@@ -61,16 +68,16 @@ public class Time extends Object{
 	} 
 
 	/*@ 
-	 	ensures \result == (time - minute) / 60;
+	 	ensures \result == hour; //ensures \result == (time - minute) / 60;
 	 */
-	public /*@ pure */ byte getHour(){
+	public /*@ pure helper */ byte getHour(){
 		return hour;
 	}
 
 	/*@ 
-	 	ensures \result == time - (hour * 60);
+	 	ensures \result == minute; //\result == time - (hour * 60);
 	 */
-	public /*@ pure */ byte getMinute(){
+	public /*@ pure helper */ byte getMinute(){
 		return minute;
 	}
 
