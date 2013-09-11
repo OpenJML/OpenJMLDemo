@@ -91,7 +91,7 @@ public class Time extends Object{
 	 	requires bArray.length >= 2;
 	 	
 	 	ensures (\forall int i; 0 <= i && i < offset; bArray[i] == \old(bArray[i]));
-	 	ensures bArray[offset] == (time - minute) / 60;
+	 	ensures bArray[offset] == hour; // (time - minute) / 60;
 	 	ensures bArray[offset+1] == time - (hour * 60);
 	 */
 	public short  getTime(byte [] bArray, short offset){

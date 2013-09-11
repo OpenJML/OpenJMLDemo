@@ -8,12 +8,12 @@ class Token {
 	//@ public invariant amount >= 0;
 	
 	//private 
-	int ownerid; // the unique id of recipient of the token.
+	/*@ spec_public*/ int ownerid; // the unique id of recipient of the token.
 	//private 
-	int tokenid; // a unique id meant to avoid accepting a token more than once.
+	/*@ spec_public*/ int tokenid; // a unique id meant to avoid accepting a token more than once.
 	
 	//private 
-	int sig; //@ in state;     // cryptographic signature.
+	/*@ spec_public*/ int sig; //@ in state;     // cryptographic signature.
 	//private 
 	/*@ spec_public */ boolean signed; //@ in state; 
 	

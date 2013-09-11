@@ -12,7 +12,7 @@ class Terminal {
 	// private 
 	Random random=new Random(0);
 	// private 
-	int ownerid;
+	/*@ spec_public */ int ownerid;
 	// private 
 	/*@ spec_public nullable */ Card card;
 
@@ -84,7 +84,7 @@ class Terminal {
         ensures pin_pos == 0;
         ensures status == EMPTY;
 
-        assignable ownerid, pin[*], status;
+        assignable this.ownerid, pin[*], status;
         signals (Exception) false;
 	 */
 	public Terminal(int ownerid){
