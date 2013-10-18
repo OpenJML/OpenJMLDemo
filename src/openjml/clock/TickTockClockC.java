@@ -37,7 +37,7 @@ public class TickTockClockC {
       @  ensures getSecond == 0;
       @  ensures (* hours and minutes are updated appropriately *);
       @*/
-	public void tick() {
+	public void tick() { 
 		second++;
 		if (second == 60) { second = 0; minute++; /*@ ghost int s = (\lbl SEC getSecond); */ }
 		if (minute == 60) { minute = 0; hour++; }
