@@ -78,7 +78,7 @@ public class CashAmount {
     int new_dollars = my_dollars + the_amount.my_dollars;
     int new_cents = my_cents + the_amount.my_cents;
     
-    if (new_cents < -CENTS_IN_DOLLAR) { 
+    if (new_cents <= -CENTS_IN_DOLLAR) { 
       new_cents = new_cents + CENTS_IN_DOLLAR;
       new_dollars = new_dollars - 1;
     } 

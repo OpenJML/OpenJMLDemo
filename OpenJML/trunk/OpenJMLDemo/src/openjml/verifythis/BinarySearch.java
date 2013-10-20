@@ -15,6 +15,8 @@ public class BinarySearch {
 		while (lo < hi) {
 			int mid = (lo + hi) / 2;
 			//@ assert mid >= lo && mid < hi; // Just checking the prover can do this arithmetic
+			//@ assert mid == lo ==> ( lo == hi-1);
+			//@ assert mid == lo ==> a[lo] <= a[hi];
 			if (a[mid] == value) return mid;
 			if (value < a[mid]) {
 				hi = mid;
