@@ -30,14 +30,14 @@ public class CashAmount {
   /**
    * The number of dollars.
    */
-  private final int my_dollars;
+  private  int my_dollars;
   //@ public model int dollars;
   //@ private represents dollars = my_dollars;
   
   /**
    * The number of cents.
    */
-  private final int my_cents;
+  private  int my_cents;
   //@ public model int cents;
   //@ private represents cents = my_cents;
   
@@ -96,6 +96,34 @@ public class CashAmount {
     }     
     
     return new CashAmount(new_dollars, new_cents);
+  }
+  
+  // @ requires the_amount == this;
+  //@ ensures (dollars*100+cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
+  public void add(final CashAmount the_amount) {
+    int new_dollars = this.my_dollars + the_amount.my_dollars;
+    int new_cents = my_cents + the_amount.my_cents;
+    
+    if (new_cents <= -CENTS_IN_DOLLAR) { 
+      new_cents = new_cents + CENTS_IN_DOLLAR;
+      new_dollars = new_dollars - 1;
+    } 
+    if (new_cents >= CENTS_IN_DOLLAR) {
+      new_cents = new_cents - CENTS_IN_DOLLAR;
+      new_dollars = new_dollars + 1;
+    } 
+    if (new_cents < 0 && new_dollars > 0) { 
+      new_cents = new_cents + CENTS_IN_DOLLAR; 
+      new_dollars = new_dollars - 1;
+    } 
+    if (new_cents > 0 && new_dollars < 0) {
+      new_cents = new_cents - CENTS_IN_DOLLAR; 
+      new_dollars = new_dollars + 1;
+    } 
+    my_dollars = new_dollars;
+    my_cents = new_cents;
+    
+    return;
   }
   
   /**
