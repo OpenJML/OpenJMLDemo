@@ -30,12 +30,12 @@ public class CashAmountMF {
   /**
    * The number of dollars.
    */
-  private int my_dollars;
+  private int my_dollars; //@ in dollars, total;
   
   /**
    * The number of cents.
    */
-  private int my_cents;
+  private int my_cents; //@ in cents, total;
   
   //@ public model int dollars; //@ private represents dollars = my_dollars;
   //@ public model int cents; //@ private represents cents = my_cents;
@@ -44,7 +44,6 @@ public class CashAmountMF {
   //@ requires -100 < the_cents && the_cents < 100;
   //@ requires (the_dollars > 0 ==> the_cents >= 0) && (the_cents > 0 ==> the_dollars >= 0);
   //@ requires (the_dollars < 0 ==> the_cents <= 0) && (the_cents < 0 ==> the_dollars <= 0);
-  //@ assignable \everything;
   //@ ensures dollars == the_dollars && cents == the_cents;
   /**
    * Constructs a new CashAmount representing the specified amount of cash.
@@ -71,11 +70,13 @@ public class CashAmountMF {
    * @param the_amount The amount to increase by.
    * @return The resulting CashAmount.
    */
-  //@ ensures \result.dollars*100 + \result.cents == (the_amount.dollars*100 + the_amount.cents) + \old(dollars*100+cents);
+  //@ ensures (\lbl RTE \result.dollars*100 + \result.cents) == (\lbl ATE (the_amount.dollars*100 + the_amount.cents)) + (\lbl PTE \old(dollars*100+cents));
   //@ ensures (\lbl RT \result.total) == (\lbl PT this.total) + (\lbl AT the_amount.total);
   public CashAmountMF increase(final CashAmountMF the_amount) {
 	    int new_dollars = my_dollars + the_amount.my_dollars;
 	    int new_cents = my_cents + the_amount.my_cents;
+		  //@ ghost int i = (\lbl MD my_dollars) + (\lbl MC my_cents) + (\lbl AD the_amount.my_dollars) + (\lbl AC the_amount.my_cents) + (\lbl RD new_dollars) + (\lbl RC new_cents);
+	    //@ ghost int j = (\lbl MT total) + (\lbl ATT the_amount.total);
 	    //@ ghost boolean b = (\lbl SAME this == the_amount);
 	    
 	    if (new_cents <= -CENTS_IN_DOLLAR) {
@@ -84,7 +85,7 @@ public class CashAmountMF {
 	    } 
 	    if (new_cents >= CENTS_IN_DOLLAR) {
 	      new_cents = new_cents - CENTS_IN_DOLLAR;
-	      new_dollars = new_dollars - 1;
+	      new_dollars = new_dollars + 1;
 	    } 
 	    if (new_cents < 0 && new_dollars > 0) { 
 	      new_cents = new_cents + CENTS_IN_DOLLAR; 
@@ -97,7 +98,8 @@ public class CashAmountMF {
 	    
 	    return new CashAmountMF(new_dollars, new_cents);
 	  }
-	  
+	
+  //@ requires this != the_amount;
   //@ ensures dollars*100 + cents == (the_amount.dollars*100 + the_amount.cents) + \old(dollars*100+cents);
   //@ ensures (\lbl RT this.total) == (\lbl PT \old(this.total)) + (\lbl AT the_amount.total);
   public void add(final CashAmountMF the_amount) {
