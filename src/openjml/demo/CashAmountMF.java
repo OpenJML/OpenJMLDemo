@@ -18,10 +18,10 @@
 public class CashAmountMF {
   
   // invariants for sane amounts of dollars and cents
-  //@ private invariant -CENTS_IN_DOLLAR < my_cents && my_cents < CENTS_IN_DOLLAR;
-  //@ private invariant my_dollars >= 0 <==> my_cents >= 0;
-  //@ private invariant my_dollars <= 0 <==> my_cents <= 0;
-  
+  //@ public invariant -CENTS_IN_DOLLAR < cents && cents < CENTS_IN_DOLLAR;
+  //@ public invariant (dollars > 0 ==> cents >= 0) && (cents > 0 ==> dollars >= 0);
+  //@ public invariant (dollars < 0 ==> cents <= 0) && (cents < 0 ==> dollars <= 0);
+
   /**
    * The number of cents in one dollar.
    */
@@ -41,10 +41,11 @@ public class CashAmountMF {
   //@ public model int cents; //@ private represents cents = my_cents;
   //@ public model int total; //@ private represents total = my_dollars*100 + my_cents;
   
-  //@ requires -100 < cents && cents < 100;
-  //@ requires cents <= 0 <==> dollars <= 0;
-  //@ requires cents >= 0 <==> dollars >= 0;
+  //@ requires -100 < the_cents && the_cents < 100;
+  //@ requires (the_dollars > 0 ==> the_cents >= 0) && (the_cents > 0 ==> the_dollars >= 0);
+  //@ requires (the_dollars < 0 ==> the_cents <= 0) && (the_cents < 0 ==> the_dollars <= 0);
   //@ assignable \everything;
+  //@ ensures dollars == the_dollars && cents == the_cents;
   /**
    * Constructs a new CashAmount representing the specified amount of cash.
    * 
@@ -75,12 +76,13 @@ public class CashAmountMF {
   public CashAmountMF increase(final CashAmountMF the_amount) {
 	    int new_dollars = my_dollars + the_amount.my_dollars;
 	    int new_cents = my_cents + the_amount.my_cents;
+	    //@ ghost boolean b = (\lbl SAME this == the_amount);
 	    
-	    if (new_cents < -CENTS_IN_DOLLAR) {
+	    if (new_cents <= -CENTS_IN_DOLLAR) {
 	      new_cents = new_cents + CENTS_IN_DOLLAR;
 	      new_dollars = new_dollars - 1;
 	    } 
-	    if (new_cents > CENTS_IN_DOLLAR) {
+	    if (new_cents >= CENTS_IN_DOLLAR) {
 	      new_cents = new_cents - CENTS_IN_DOLLAR;
 	      new_dollars = new_dollars - 1;
 	    } 
