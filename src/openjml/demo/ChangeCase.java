@@ -1,4 +1,4 @@
-package openjml.demo;
+//package openjml.demo;
 
 public class ChangeCase {
 	
@@ -12,14 +12,14 @@ public class ChangeCase {
 	//@   ensures \result == c;
 	public char changeCase(char c) {
 		char result = ' ';    
-		if (c >= 'Z') {
+		if (c >= 'z') {
 			result = c;
-		} else if (c >= 'A') {
-			result =  (char)(c - 'A' + 'a');
-		} else if (c > 'z') {
-			result =  c;
 		} else if (c >= 'a') {
 			result =  (char)(c - 'a' + 'A');
+		} else if (c >= 'Z') {
+			result =  c;
+		} else if (c >= 'A') {
+			result =  (char)(c - 'A' + 'a');
 		} else {
 			result = c;
 		}
