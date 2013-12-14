@@ -40,7 +40,7 @@ public class CashAmountOnlyPrivate {
   //@ requires -100 < the_cents && the_cents < 100;
   //@ requires the_cents <= 0 <==> the_dollars <= 0;
   //@ requires the_cents >= 0 <==> the_dollars >= 0;
-  //@ assignable \everything;
+  //@ assignable this.*;
   /**
    * Constructs a new CashAmount representing the specified amount of cash.
    * 
@@ -56,6 +56,7 @@ public class CashAmountOnlyPrivate {
    * @return a new CashAmount representing the negation of this
    * CashAmount.
    */
+  //@ pure
   public CashAmountOnlyPrivate negate() {
     return new CashAmountOnlyPrivate(-my_dollars, -my_cents);
   }
@@ -66,6 +67,7 @@ public class CashAmountOnlyPrivate {
    * @param the_amount The amount to increase by.
    * @return The resulting CashAmount.
    */
+  //@ pure
   public CashAmountOnlyPrivate increase(final CashAmountOnlyPrivate the_amount) {
     int new_dollars = my_dollars + the_amount.my_dollars;
     int new_cents = my_cents + the_amount.my_cents;
@@ -96,6 +98,7 @@ public class CashAmountOnlyPrivate {
    * @param the_amount The amount to decrease by.
    * @return The resulting CashAmount.
    */
+  //@ pure
   public CashAmountOnlyPrivate decrease(final CashAmountOnlyPrivate the_amount) {
     return increase(the_amount.negate());
   }

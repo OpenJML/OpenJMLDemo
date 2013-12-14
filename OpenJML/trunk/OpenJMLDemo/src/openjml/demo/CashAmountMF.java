@@ -60,6 +60,7 @@ public class CashAmountMF {
    * @return a new CashAmount representing the negation of this
    * CashAmount.
    */
+  //@ pure
   public CashAmountMF negate() {
     return new CashAmountMF(-my_dollars, -my_cents);
   }
@@ -72,6 +73,7 @@ public class CashAmountMF {
    */
   //@ ensures (\lbl RTE \result.dollars*100 + \result.cents) == (\lbl ATE (the_amount.dollars*100 + the_amount.cents)) + (\lbl PTE \old(dollars*100+cents));
   //@ ensures (\lbl RT \result.total) == (\lbl PT this.total) + (\lbl AT the_amount.total);
+  //@ pure
   public CashAmountMF increase(final CashAmountMF the_amount) {
 	    int new_dollars = my_dollars + the_amount.my_dollars;
 	    int new_cents = my_cents + the_amount.my_cents;
@@ -100,6 +102,7 @@ public class CashAmountMF {
 	  }
 	
   //@ requires this != the_amount;
+  //@ assignable this.*;
   //@ ensures dollars*100 + cents == (the_amount.dollars*100 + the_amount.cents) + \old(dollars*100+cents);
   //@ ensures (\lbl RT this.total) == (\lbl PT \old(this.total)) + (\lbl AT the_amount.total);
   public void add(final CashAmountMF the_amount) {
@@ -134,6 +137,7 @@ public class CashAmountMF {
    * @param the_amount The amount to decrease by.
    * @return The resulting CashAmount.
    */
+  //@ pure
   public CashAmountMF decrease(final CashAmountMF the_amount) {
     return increase(the_amount.negate());
   }

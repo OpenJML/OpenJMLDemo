@@ -58,6 +58,7 @@ public class CashAmountMutable {
    * @return a new CashAmount representing the negation of this
    * CashAmount.
    */
+  //@ pure
   public CashAmountMutable negate() {
     return new CashAmountMutable(-my_dollars, -my_cents);
   }
@@ -68,6 +69,7 @@ public class CashAmountMutable {
    * @param the_amount The amount to increase by.
    * @return The resulting CashAmount.
    */
+  //@ assignable \nothing;
   //@ ensures \result.my_dollars*100 + \result.my_cents == (the_amount.my_dollars*100 + the_amount.my_cents) + \old(my_dollars*100+my_cents);
   public CashAmountMutable increase(final CashAmountMutable the_amount) {
 	    int new_dollars = my_dollars + the_amount.my_dollars;
@@ -127,6 +129,7 @@ public class CashAmountMutable {
    * @param the_amount The amount to decrease by.
    * @return The resulting CashAmount.
    */
+  //@ assignable \nothing;
   public CashAmountMutable decrease(final CashAmountMutable the_amount) {
     return increase(the_amount.negate());
   }
