@@ -11,7 +11,7 @@ public class Types {
 		//@ ghost boolean b3 = (\lbl C \type(java.util.ArrayList<Integer>) <: \type(java.util.List<Number>));
 		//@ ghost boolean b4 = (\lbl D \type(java.util.ArrayList<Integer>) <: \type(java.util.List<?>));
 		//@ ghost boolean b5 = (\lbl E \type(java.util.ArrayList) <: \type(java.util.List));
-		Integer i = (Integer)a.get(0);
+		/*@ nullable */ Integer i = (Integer)a.get(0);
 		//@ assert false;
 	}
 		
