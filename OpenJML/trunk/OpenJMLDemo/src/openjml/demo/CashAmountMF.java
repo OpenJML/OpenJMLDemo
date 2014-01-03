@@ -15,7 +15,7 @@
  * @author Daniel M. Zimmerman
  * @version 2013-10-17
  */
-public class CashAmountMF {
+/*@ code_java_math */ public class CashAmountMF {
   
   // invariants for sane amounts of dollars and cents
   //@ public invariant -CENTS_IN_DOLLAR < cents && cents < CENTS_IN_DOLLAR;
