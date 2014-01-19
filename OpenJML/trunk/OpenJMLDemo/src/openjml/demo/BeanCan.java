@@ -1,5 +1,5 @@
 //package sv_esc_solutions;
-
+/*@ code_java_math */
 abstract class BeanCan {
 
     public static final boolean WHITE = false;

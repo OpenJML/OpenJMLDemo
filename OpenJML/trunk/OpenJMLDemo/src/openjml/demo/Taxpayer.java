@@ -1,6 +1,5 @@
 //package sv_esc_solutions;
 
-
 /* 
   This assignment illustrates how specifications (esp invariants and 
   preconditions)  written in a formal language can help in removing 
@@ -9,6 +8,7 @@
   The assignment concerns a class "Taxpayer" that is used for taxpayers.
 
  */
+/*@ code_java_math */
 class Taxpayer {
 
  /* Part 1 of exercise. */
