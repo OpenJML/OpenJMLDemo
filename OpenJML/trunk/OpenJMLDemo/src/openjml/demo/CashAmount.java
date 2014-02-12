@@ -19,8 +19,8 @@
   
   // invariants for sane amounts of dollars and cents
   //@ public invariant -CENTS_IN_DOLLAR < cents() && cents() < CENTS_IN_DOLLAR;
-  //@ public invariant cents() > 0 ==> dollars() >= 0 && dollars > 0 ==> cents() >= 0;
-  //@ public invariant cents() < 0 ==> dollars() <= 0 && dollars < 0 ==> cents() <= 0;
+  //@ public invariant cents() > 0 ==> dollars() >= 0 && (dollars() > 0 ==> cents() >= 0);
+  //@ public invariant cents() < 0 ==> dollars() <= 0 && (dollars() < 0 ==> cents() <= 0);
   
   /**
    * The number of cents in one dollar.
@@ -30,23 +30,22 @@
   /**
    * The number of dollars.
    */
-  private  int my_dollars;
+  private  int my_dollars; //@ in dollars;
   //@ public model int dollars;
   //@ private represents dollars = my_dollars;
   
   /**
    * The number of cents.
    */
-  private  int my_cents;
+  private  int my_cents; //@ in cents;
   //@ public model int cents;
   //@ private represents cents = my_cents;
   
   //@ requires -100 < the_cents && the_cents < 100;
-  //@ requires the_cents < 0 ==> the_dollars <= 0 && the_dollars < 0 ==> the_cents <= 0;
-  //@ requires the_cents > 0 ==> the_dollars >= 0 && the_dollars > 0 ==> the_cents >= 0;
+  //@ requires the_cents < 0 ==> the_dollars <= 0 && (the_dollars < 0 ==> the_cents <= 0);
+  //@ requires the_cents > 0 ==> the_dollars >= 0 && (the_dollars > 0 ==> the_cents >= 0);
   //@ ensures dollars() == the_dollars;
   //@ ensures cents() == the_cents;
-  //@ assignable \everything;
   /**
    * Constructs a new CashAmount representing the specified amount of cash.
    * 
@@ -64,6 +63,7 @@
    */
   //@ ensures \result.dollars() == -dollars();
   //@ ensures \result.cents() == -cents();
+  //@ pure
   public CashAmount negate() {
     return new CashAmount(-my_dollars, -my_cents);
   }
@@ -74,6 +74,8 @@
    * @param the_amount The amount to increase by.
    * @return The resulting CashAmount.
    */
+  //@ ensures (\result.dollars*100+\result.cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
+  //@ pure
   public CashAmount increase(final CashAmount the_amount) {
     int new_dollars = my_dollars + the_amount.my_dollars;
     int new_cents = my_cents + the_amount.my_cents;
@@ -98,9 +100,37 @@
     return new CashAmount(new_dollars, new_cents);
   }
   
-  // @ requires the_amount == this;
+  //@ requires the_amount != this;
   //@ ensures (dollars*100+cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
   public void add(final CashAmount the_amount) {
+    int new_dollars = this.my_dollars + the_amount.my_dollars;
+    int new_cents = my_cents + the_amount.my_cents;
+    
+    if (new_cents <= -CENTS_IN_DOLLAR) { 
+      new_cents = new_cents + CENTS_IN_DOLLAR;
+      new_dollars = new_dollars - 1;
+    } 
+    if (new_cents >= CENTS_IN_DOLLAR) {
+      new_cents = new_cents - CENTS_IN_DOLLAR;
+      new_dollars = new_dollars + 1;
+    } 
+    if (new_cents < 0 && new_dollars > 0) { 
+      new_cents = new_cents + CENTS_IN_DOLLAR; 
+      new_dollars = new_dollars - 1;
+    } 
+    if (new_cents > 0 && new_dollars < 0) {
+      new_cents = new_cents - CENTS_IN_DOLLAR; 
+      new_dollars = new_dollars + 1;
+    } 
+    my_dollars = new_dollars;
+    my_cents = new_cents;
+    
+    return;
+  }
+  
+  // @ requires the_amount == this;
+  //@ ensures (dollars*100+cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
+  public void addx(final CashAmount the_amount) {
     int new_dollars = this.my_dollars + the_amount.my_dollars;
     int new_cents = my_cents + the_amount.my_cents;
     
@@ -132,6 +162,7 @@
    * @param the_amount The amount to decrease by.
    * @return The resulting CashAmount.
    */
+  //@ ensures (\result.dollars*100+\result.cents) ==\old(dollars*100+cents) - (the_amount.dollars*100+the_amount.cents);
   public CashAmount decrease(final CashAmount the_amount) {
     return increase(the_amount.negate());
   }
