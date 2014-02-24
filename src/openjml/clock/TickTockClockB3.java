@@ -53,8 +53,10 @@ public class TickTockClockB3 {
       @*/
 	public void tick() {
 		second++;
-		if (second == 60) { minute++; /*@ ghost int s = (\lbl SECOND getSecond()); */ }
+		if (second == 60) { minute++; /*@ ghost int s = (\lbl SECOND getSecond()); */ } // ERROR here
 		if (minute == 60) { minute = 0; hour++; }
 		if (hour == 24) { hour = 0; }
 	}
+	// Note - no error reported in tick because of the ensures clauses on getSecond()
+	// FIXME - should report an undefined precondition
 }

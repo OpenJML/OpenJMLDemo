@@ -19,8 +19,8 @@
   
   // invariants for sane amounts of dollars and cents
   //@ public invariant -CENTS_IN_DOLLAR < cents() && cents() < CENTS_IN_DOLLAR;
-  //@ public invariant cents() > 0 ==> dollars() >= 0 && (dollars() > 0 ==> cents() >= 0);
-  //@ public invariant cents() < 0 ==> dollars() <= 0 && (dollars() < 0 ==> cents() <= 0);
+  //@ public invariant (cents() > 0 ==> dollars() >= 0) && (dollars() > 0 ==> cents() >= 0);
+  //@ public invariant (cents() < 0 ==> dollars() <= 0) && (dollars() < 0 ==> cents() <= 0);
   
   /**
    * The number of cents in one dollar.
@@ -41,9 +41,9 @@
   //@ public model int cents;
   //@ private represents cents = my_cents;
   
-  //@ requires -100 < the_cents && the_cents < 100;
-  //@ requires the_cents < 0 ==> the_dollars <= 0 && (the_dollars < 0 ==> the_cents <= 0);
-  //@ requires the_cents > 0 ==> the_dollars >= 0 && (the_dollars > 0 ==> the_cents >= 0);
+  //@ requires -CENTS_IN_DOLLAR < the_cents && the_cents < CENTS_IN_DOLLAR;
+  //@ requires (the_cents < 0 ==> the_dollars <= 0) && (the_dollars < 0 ==> the_cents <= 0);
+  //@ requires (the_cents > 0 ==> the_dollars >= 0) && (the_dollars > 0 ==> the_cents >= 0);
   //@ ensures dollars() == the_dollars;
   //@ ensures cents() == the_cents;
   /**
@@ -74,7 +74,7 @@
    * @param the_amount The amount to increase by.
    * @return The resulting CashAmount.
    */
-  //@ ensures (\result.dollars*100+\result.cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
+  //@ ensures (\result.dollars*CENTS_IN_DOLLAR+\result.cents) ==\old(dollars*CENTS_IN_DOLLAR+cents) + (the_amount.dollars*CENTS_IN_DOLLAR+the_amount.cents);
   //@ pure
   public CashAmount increase(final CashAmount the_amount) {
     int new_dollars = my_dollars + the_amount.my_dollars;
@@ -101,7 +101,7 @@
   }
   
   //@ requires the_amount != this;
-  //@ ensures (dollars*100+cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
+  //@ ensures (dollars*CENTS_IN_DOLLAR+cents) ==\old(dollars*CENTS_IN_DOLLAR+cents) + (the_amount.dollars*CENTS_IN_DOLLAR+the_amount.cents);
   public void add(final CashAmount the_amount) {
     int new_dollars = this.my_dollars + the_amount.my_dollars;
     int new_cents = my_cents + the_amount.my_cents;
