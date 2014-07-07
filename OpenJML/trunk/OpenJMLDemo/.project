@@ -15,9 +15,21 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.openjml.AutoAntBuildFile.Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.jmlspecs.OpenJMLUI.JMLNatureID</nature>
+		<nature>org.openjml.AutoAntBuildFile.Nature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>OPENJML_RUNTIME_LIBRARY</name>
+			<value>$%7BPARENT-1-PROJECT_LOC%7D/OpenJML/tempjars/jmlruntime.jar</value>
+		</variable>
+	</variableList>
 </projectDescription>

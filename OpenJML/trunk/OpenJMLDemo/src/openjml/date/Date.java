@@ -1,4 +1,4 @@
-package sv_esc_solutions;
+package date;
 
 /**
  * Copyright (c) 1999 GEMPLUS group. All Rights Reserved.
