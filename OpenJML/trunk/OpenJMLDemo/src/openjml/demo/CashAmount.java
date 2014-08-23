@@ -128,8 +128,8 @@
     return;
   }
   
-  //@ requires the_amount != this;
-  //@ ensures (my_dollars*100+cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
+  // @ requires the_amount != this;
+  //@ ensures (dollars*100+cents) ==\old(dollars*100+cents) + (the_amount.dollars*100+the_amount.cents);
   public void addx(final CashAmount the_amount) {
     int new_dollars = this.my_dollars + the_amount.my_dollars;
     int new_cents = my_cents + the_amount.my_cents;
@@ -152,7 +152,6 @@
     } 
     my_dollars = new_dollars;
     my_cents = new_cents;
-    int x; x = the_amount.my_dollars;
     
     return;
   }
