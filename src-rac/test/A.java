@@ -10,7 +10,7 @@ public class A {
 		return -k;
 	}
 	
-	//@ ensures \fresh(null); 
+	//+ESC@ ensures \fresh(null); 
 	public static void main(@NonNull String... args) {
 		System.out.println("START");
 		//@ assert false;  
