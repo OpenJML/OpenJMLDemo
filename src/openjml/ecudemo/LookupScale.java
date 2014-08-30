@@ -2,10 +2,10 @@
 public class LookupScale {
 	int[] values;
 	//@ invariant this.values.length > 1;
-	//@ invariant (\forall int k; k>0 && k<this.values.length; this.values[k-1] <= this.values[k]);
+	//@ invariant (\forall int k; k>0 && k<this.values.length; (\forall int kk; 0<=kk && kk < k; this.values[kk] <= this.values[k]));
 	
 	//@ requires values.length > 1;
-	//@ requires (\forall int k; k>0 && k<values.length; values[k-1] <= values[k]);
+	//@ requires (\forall int k; k>0 && k<this.values.length; (\forall int kk; 0<=kk && kk < k; this.values[kk] <= this.values[k]));
 	//@ ensures this.values == values;
 	LookupScale(int[] values) {
 		this.values = values;
