@@ -1,4 +1,5 @@
-package sv_rac_solutions;
+//package sv_rac_solutions;
+// Changed Time to TimeMod to have an alternate version
 
 /**
  * Copyright (c) 1999 GEMPLUS group. All Rights Reserved.
@@ -16,7 +17,7 @@ package sv_rac_solutions;
  */
 
 /* model the time for the transactions*/
-public class Time extends Object{
+public class TimeMod extends Object{
 
 
 	//@ public model int time;
@@ -57,7 +58,7 @@ public class Time extends Object{
 	  	requires h.getMinute() >= getMinute();
 	  	ensures this.time == h.time;
 	 */
-	public void setTime(Time h) {
+	public void setTime(TimeMod h) {
 		setTime(h.getHour(), h.getMinute());
 		//@ assert h.getHour() == getHour();
 		//@ assert h.getMinute() == getMinute();
@@ -102,11 +103,11 @@ public class Time extends Object{
 	}
 	
 	//@ ensures getHour() == 0 && getMinute() == 0;
-	public Time() {}
+	public TimeMod() {}
 	
 	public static void main(String[] args) {
-		Time t = new Time();
-		t.setTime((byte)10, (byte)01);  // Fails if Time() is not specified 
+		TimeMod t = new TimeMod();
+		t.setTime((byte)10, (byte)01);  // Fails if TimeMod() is not specified 
 		t.getHour();
 		t.getMinute();
 	}
