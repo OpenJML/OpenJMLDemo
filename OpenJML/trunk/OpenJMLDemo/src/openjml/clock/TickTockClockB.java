@@ -41,9 +41,9 @@ public class TickTockClockB {
 	/*@  requires getSecond() < 59;
       @  // assignable hour, minute, second; // NB for expository purposes only
       @  assignable _time_state;
-      @  ensures getSecond() == \old(getSecond() + 1) &&
-      @          getMinute() == \old(getMinute()) &&
-      @          getHour() == \old(getHour());
+      @  ensures getSecond() == \old(getSecond() + 1);
+      @  ensures getMinute() == \old(getMinute());
+      @  ensures getHour() == \old(getHour());
       @ also
       @  requires getSecond() == 59;
       @  assignable _time_state;
