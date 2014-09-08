@@ -1,6 +1,17 @@
-// Using fields instead of getHour()... functions; need to adjust visibility
-// Need to embellish postconditions of getHour()...
-// Issue with evaluating a method inside an \old 
+// In this instance of the example, we introdu8ce a bug.
+// In the then branch of (if (second == 60) of method tick,
+// the value of 'second' is not set to 0.  We then attempt to 
+// record the value of 'second' using a lbl expression. However,
+// the call of getSecond() in that expression issues a UndefinedCalledMetehodPrecondition
+// warning. This is because the preconditions for calling getSecond() include the
+// object invariants, which require that 'second <= 59'. Since at this point 
+// 'second' is 60, the precondition is violated and it is not legal to call
+// 'getSecond()'.
+//
+// The way out of this problem is to declare getSecond() as a helper method
+//
+// But that still leaves a problem in that the postsconditions of getSecond() 
+// require getSecond() to return a value <= 59...  SAY MORE
 
 package openjml.clock;
 public class TickTockClockB2 {
@@ -52,7 +63,7 @@ public class TickTockClockB2 {
       @*/
 	public void tick() {
 		second++;
-		if (second == 60) { minute++; /*@ ghost int s = (\lbl SECOND getSecond()); */ }
+		if (second == 60) { minute++; /*@ ghost int s = (\lbl SECOND getSecond()); */   }
 		if (minute == 60) { minute = 0; hour++; }
 		if (hour == 24) { hour = 0; }
 	}
