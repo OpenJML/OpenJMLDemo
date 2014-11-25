@@ -2,44 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src-rac"/>
 	<classpathentry kind="src" path="src/openjml/demo"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/resources.jar" sourcepath="C:/Program Files/Java/jdk1.7.0_07/src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="http://download.oracle.com/javase/7/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/rt.jar" sourcepath="C:/Program Files/Java/jdk1.7.0_07/src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="http://download.oracle.com/javase/7/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/jsse.jar" sourcepath="C:/Program Files/Java/jdk1.7.0_07/src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="http://download.oracle.com/javase/7/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/jce.jar" sourcepath="C:/Program Files/Java/jdk1.7.0_07/src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="http://download.oracle.com/javase/7/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/charsets.jar" sourcepath="C:/Program Files/Java/jdk1.7.0_07/src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="http://download.oracle.com/javase/7/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/jfr.jar" sourcepath="C:/Program Files/Java/jdk1.7.0_07/src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="http://download.oracle.com/javase/7/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/access-bridge-64.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/dnsns.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/jaccess.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/localedata.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/sunec.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/sunjce_provider.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/sunmscapi.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_07/jre/lib/ext/zipfs.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/JMLAnnotations"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
