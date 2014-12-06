@@ -52,7 +52,7 @@ public class TickTockClockB1 {
       @*/
 	public void tick() {
 		second++;
-		if (second == 60) { minute++; /*@ ghost int s = (\lbl SECOND second); */ }
+		if (second == 60) { minute++; /*@ ghost int s = (\lbl SECOND second); */ } // ERROR expected: second not set back to 0
 		if (minute == 60) { minute = 0; hour++; }
 		if (hour == 24) { hour = 0; }
 	}
