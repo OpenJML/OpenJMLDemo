@@ -18,26 +18,26 @@ public class Types {
 		//@ assert false; // To be sure of feasibility and so that labels are printed
 	}
 		
-	public <T> void types(java.util.List<T> a) {
+	public <T> void types(java.util.List<T> a) {  // Should be able to prove the third line, given the first
 		//@ assume \typeof(a) == \type(java.util.List<Integer>);
 		/*@ nullable */ T t = a.get(0);
 		/*@ nullable */ Integer i = (Integer)t;
 	}
 		
-	public <T> void types5(java.util.List<T> a) {
+	public <T> void types5(java.util.List<T> a) { // Should be able to prove the third line, given the first
 		//@ assume \type(java.util.List<T>) == \type(java.util.List<Integer>);
 		//@ assert \type(T) == \type(Integer);
 		/*@ nullable */ Integer i = (Integer)a.get(0);
 	}
 		
-	public <T> void types4(java.util.List<T> a) {
+	public <T> void types4(java.util.List<T> a) { // Should be OK
 		//@ assume \type(T) == \type(Integer);
 		/*@ nullable */ Integer i = (Integer)a.get(0);
 	}
 		
 	public void types1(java.util.List<?> a) {
 		//@ assume \typeof(a) == \type(java.util.List<Integer>);
-		/*@ nullable */ Integer i = (Integer)a.get(0); // ERROR - a ? is not necessarily an Integer
+		/*@ nullable */ Integer i = (Integer)a.get(0); // Should be provable with the assumption
 	}
 		
 	public int typesr(java.util.List<?> a) {
@@ -46,6 +46,14 @@ public class Types {
 		
 	public /*@ nullable */ <T> T typesz(java.util.List<T> a) {
 		return a.get(0);
+	}
+		
+	public <T> void types4e(java.util.List<T> a) { // Should fail to prove
+		/*@ nullable */ Integer i = (Integer)a.get(0);
+	}
+		
+	public void types1e(java.util.List<?> a) {
+		/*@ nullable */ Integer i = (Integer)a.get(0); // Should fail to prove
 	}
 		
 		
