@@ -57,3 +57,6 @@ public class TickTockClockA {
 		if (hour == 24) { hour = 0; }
 	}
 }
+/* Following on TickTockClock1, postconditions are added to get...() to stipulate the result value.
+ * However, since the hour, minute, second fields are portoected, they may not be used in a public behvaior.
+ */

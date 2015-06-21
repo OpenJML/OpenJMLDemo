@@ -1,6 +1,6 @@
-// Using fields instead of getHour()... functions; need to adjust visibility
-// Need to embellish postconditions of getHour()...
-// Issue with evaluating a method inside an \old 
+// 
+// 
+//  
 
 package openjml.clock;
 public class TickTockClockB {
@@ -57,3 +57,5 @@ public class TickTockClockB {
 		if (hour == 24) { hour = 0; }
 	}
 }
+/* In this version of the example, everything is public and everything validates.
+ */
