@@ -94,7 +94,7 @@ public class Time extends Object{
 	 	ensures bArray[offset] == hour; // (time - minute) / 60;
 	 	ensures bArray[offset+1] == time - (hour * 60);
 	 */
-	public short  getTime(byte [] bArray, short offset){
+	public short  getTime(byte [] bArray, short offset){ // FIXME - this test works if all the shorts are ints - so the problem is with numeric conversion
 		short aux = offset;
 		bArray[aux++] = hour;
 		bArray[aux++] = minute;	
