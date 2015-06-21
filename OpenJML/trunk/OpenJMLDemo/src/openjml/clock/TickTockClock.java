@@ -28,7 +28,7 @@ public class TickTockClock {
 	public /*@ pure @*/ int getSecond() { return second; }
 
 	/*@  requires getSecond() < 59;
-      @  assignable hour, minute, second; // NB for expository purposes only
+      @  assignable hour, minute, second; // ERROR - these fields are not public
       @  assignable _time_state;
       @  ensures getSecond() == \old(getSecond() + 1) &&
       @          getMinute() == \old(getMinute()) &&
@@ -46,3 +46,10 @@ public class TickTockClock {
 		if (hour == 24) { hour = 0; }
 	}
 }
+/* This example implements a clock, represented by values of hours, minutes, seconds;
+ * the time is incremented by tick().
+ * This version of the example demonstrates using a public data group _time_state to
+ * represent the (protected) internal implementation fields; using the hours, minutes,
+ * seconds fields in the assignable clauses of tick() is an error, since they are protected,
+ * not public - hence the need for the public data group.
+ */

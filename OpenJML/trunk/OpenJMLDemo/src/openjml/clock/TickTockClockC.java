@@ -44,3 +44,5 @@ public class TickTockClockC {
 		if (hour == 24) { hour = 0; }
 	}
 }
+/* Version of example using model fields with representations.
+ */

@@ -1,6 +1,6 @@
-// Using fields instead of getHour()... functions; need to adjust visibility
-// Need to embellish postconditions of getHour()...
-// Issue with evaluating a method inside an \old 
+//
+//
+// 
 
 package openjml.clock;
 public class TickTockClockB1 {
@@ -57,3 +57,7 @@ public class TickTockClockB1 {
 		if (hour == 24) { hour = 0; }
 	}
 }
+/* This version of the example has a deliberate bug in that the 'second' field is not set back to 0 when it hits 60.
+ * Then the invariant cannot be proved on exit from tick(). The warning is repeated 3 times because there are
+ * three different paths that can be followed from that bug.
+ */

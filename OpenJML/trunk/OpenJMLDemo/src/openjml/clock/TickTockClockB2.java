@@ -2,7 +2,7 @@
 // In the then branch of (if (second == 60) of method tick,
 // the value of 'second' is not set to 0.  We then attempt to 
 // record the value of 'second' using a lbl expression. However,
-// the call of getSecond() in that expression issues a UndefinedCalledMetehodPrecondition
+// the call of getSecond() in that expression issues a UndefinedCalledMethodPrecondition
 // warning. This is because the preconditions for calling getSecond() include the
 // object invariants, which require that 'second <= 59'. Since at this point 
 // 'second' is 60, the precondition is violated and it is not legal to call
@@ -10,8 +10,8 @@
 //
 // The way out of this problem is to declare getSecond() as a helper method
 //
-// But that still leaves a problem in that the postsconditions of getSecond() 
-// require getSecond() to return a value <= 59...  SAY MORE
+// But that still leaves a problem in that the postconditions of getSecond() 
+// require getSecond() to return a value <= 59.
 
 package openjml.clock;
 public class TickTockClockB2 {

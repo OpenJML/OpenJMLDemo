@@ -60,3 +60,7 @@ public class TickTockClockA1 {
 		if (hour == 24) { hour = 0; }
 	}
 }
+/* Following on TickTockClockA, the hour, minute, second fields are declared spec_public so they may
+ * be used in the get...() postconditions. But now they are public and may not be used in protected
+ * invariants.
+ */

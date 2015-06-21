@@ -46,3 +46,10 @@ public class TickTockClock1 {
 		if (hour == 24) { hour = 0; }
 	}
 }
+/* This example implements a clock, represented by values of hours, minutes, seconds;
+ * the time is incremented by tick().
+ * This version has this problem:
+ *   The postcondtions of rgetHour(), getMinute(), getSecond() only constrain the
+ *   values of their results, but do not relate the results to the values of hour, minute, second.
+ *   Consequently the postconditions of neither the constructor nor tick() can be proved.
+ */
