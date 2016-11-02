@@ -25,10 +25,10 @@ public class Time extends Object{
 	}
 
 	//@ public model int time;
-	//@ represents time <- hour * 60 + minute;
+	//@ represents time = hour * 60 + minute;
 	
 	//@ public model int maxTime;
-	//@ represents maxTime <- 23 * 60 + 59;
+	//@ represents maxTime = 23 * 60 + 59;
 
 	/*@
 	 	public invariant time >= 0;
@@ -89,12 +89,11 @@ public class Time extends Object{
 	 	
 	 	requires 0 <= offset && offset < bArray.length - 1;
 	 	requires bArray.length >= 2;
-	 	
-	 	ensures (\forall int i; 0 <= i && i < offset; bArray[i] == \old(bArray[i]));
+	 	assignable bArray[offset], bArray[offset+1];
 	 	ensures bArray[offset] == hour; // (time - minute) / 60;
 	 	ensures bArray[offset+1] == time - (hour * 60);
 	 */
-	public short  getTime(byte [] bArray, short offset){ // FIXME - this test works if all the shorts are ints - so the problem is with numeric conversion
+	public short  getTime(byte [] bArray, short offset){
 		short aux = offset;
 		bArray[aux++] = hour;
 		bArray[aux++] = minute;	
