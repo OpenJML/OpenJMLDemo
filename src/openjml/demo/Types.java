@@ -6,7 +6,7 @@ public class Types {
 	
 	public void types3(java.util.List<Integer> a) {
 		/*@ nullable */ Integer i = a.get(0);
-		//@ assert false; // ERROR
+		//@ assert false; // ERROR should be reported, since a.get(0) should return an Integer
 	}
 		
 	public void types2(java.util.List<Integer> a) {
@@ -48,11 +48,11 @@ public class Types {
 		return a.get(0);
 	}
 		
-	public <T> void types4e(java.util.List<T> a) { // Should fail to prove
-		/*@ nullable */ Integer i = (Integer)a.get(0);
+	public <T> void types4e(java.util.List<T> a) { // Should fail to prove - T cannot necessarily be converted to Integer
+		/*@ nullable */ Integer i = (Integer)a.get(0); // Expect ERROR
 	}
 		
-	public void types1e(java.util.List<?> a) {
+	public void types1e(java.util.List<?> a) { // Should fail to prove - ? cannot necessarily be converted to Integer
 		/*@ nullable */ Integer i = (Integer)a.get(0); // Should fail to prove
 	}
 		
