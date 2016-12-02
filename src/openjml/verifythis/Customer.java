@@ -7,33 +7,31 @@ class Customer {
     //@ static invariant max >= 0;
 
     // only one customer in crit section
-    /* @ static invariant
-    @   (\forall Customer c1; \created(c1);
-          (\forall Customer c2; \created(c2);
-    @      c1.phase == 2 && c2.phase == 2 ==> c1 == c2));
-    @*/
 
-    /*@ static invariant
-    @   (\forall Customer c1; ;
-          (\forall Customer c2; ;
-    @      c1.phase == 2 && c2.phase == 2 ==> c1 == c2));
-    @*/
-
-    // customer in crit section is minimal
-    /* @ static invariant
-      @   (\forall Customer c1; \created(c1) && c1.phase==2;
-      @      (\forall Customer c2; \created(c2) && c1!=c2 && c2.phase >= 1; 
-      @         c2.ticket > c1.ticket));
+    /*@  invariant
+      @   this.phase == 2 ==> (\forall Customer c2; ;
+      @      					c2.phase == 2 ==> this == c2);
       @*/
 
     // customer in crit section is minimal
-    /*@ static invariant
-      @   (\forall Customer c1; c1.phase==2;
-      @      (\forall Customer c2; c1!=c2 && c2.phase >= 1; 
-      @         c2.ticket > c1.ticket));
+    /*@ invariant
+      @   this.phase==2 ==>
+      @      (\forall Customer c2; c2.phase == 1; 
+      @         c2.ticket > this.ticket);
+      @*/
+    /*@ invariant
+      @   this.phase==1 ==>
+      @      (\forall Customer c2; c2.phase == 2; 
+      @         this.ticket > c2.ticket);
       @*/
 
-    //@ invariant phase >= 0 && phase <= 2;
+    // all customers have a ticket not greater than max
+    /*@ static invariant
+      @      (\forall Customer c2; c2.phase == 1 || c2.phase == 2; 
+      @         c2.ticket <= max);
+      @*/
+
+    //@ invariant phase == 0 || phase == 1 || phase == 2;
     //@ invariant ticket >= 0 && ticket <= max;
 
     /* @
@@ -46,6 +44,7 @@ class Customer {
     @ requires phase == 1 && 
     @   (\forall Customer c;  c!=this && c.phase >= 1; 
     @       c.ticket > ticket);
+    @ assignable phase;
     @ ensures phase == 2;
     @*/
     void enter() {
@@ -54,6 +53,7 @@ class Customer {
 
     /*@
       @ requires phase == 2;
+      @ assignable phase, ticket;
       @ ensures phase == 0;
       @ ensures ticket == 0;
       @*/
@@ -64,7 +64,8 @@ class Customer {
 
     /*@
       @ requires phase == 0;
-      @ ensures phase == 1;
+      @ assignable phase, ticket, max;
+      @ ensures phase == 1 && max == \old(max) + 1 && ticket == max;
       @*/
     void request() {
 	phase = 1;
