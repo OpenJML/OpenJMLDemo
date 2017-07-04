@@ -1,5 +1,5 @@
 //package sv_esc_solutions;
-/*@ code_java_math */
+/*@ code_bigint_math */
 abstract class BeanCan {
 
     public static final boolean WHITE = false;
@@ -59,11 +59,13 @@ abstract class BeanCan {
           requires num_black >= 0 && num_white >= 0;
           ensures \result == BLACK || \result == WHITE;
           ensures num_black + num_white == 1;
+          ensures \old(num_white) %2 == 0 <==> \result == BLACK;
     */
     public boolean play_game() {
         //@ loop_invariant num_black + num_white >= 1;
         //@ loop_invariant num_black >= 0;
         //@ loop_invariant num_white >= 0;
+        //@ loop_invariant (num_white - \old(num_white)) %2 == 0;
         //@ decreases num_black + num_white;
 	while (num_black + num_white > 1) {
 	    boolean bean1 = pick_random();

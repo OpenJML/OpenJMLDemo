@@ -8,7 +8,7 @@
   The assignment concerns a class "Taxpayer" that is used for taxpayers.
 
  */
-/*@ code_java_math */
+/*@ code_bigint_math */
 class Taxpayer {
 
  /* Part 1 of exercise. */
