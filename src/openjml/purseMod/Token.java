@@ -1,7 +1,7 @@
 
 
 class Token {
-	//@ public model Object state;
+	//-RAC@ public model Object state;
 	
 	//private 
 	/*@ spec_public */ int amount;  // the value of the token.
@@ -13,9 +13,9 @@ class Token {
 	/*@ spec_public*/ int tokenid; // a unique id meant to avoid accepting a token more than once.
 	
 	//private 
-	/*@ spec_public*/ int sig; //@ in state;     // cryptographic signature.
+	/*@ spec_public*/ int sig; //-RAC@ in state;     // cryptographic signature.
 	//private 
-	/*@ spec_public */ boolean signed; //@ in state; 
+	/*@ spec_public */ boolean signed; //-RAC@ in state; 
 	
 	// life cycle of token
 	// it has to be signed, before it can be checked
@@ -29,7 +29,7 @@ class Token {
 	    
 	    public static invariant UNINIT==0 && SIGNED==1 && BLOCKED==2 && TEMP_BLOCKED==3 && ACTIVE==4;
 	    
-	    public ghost int status = UNINIT; //@ in state; 
+	    public ghost int status = UNINIT; //-RAC@ in state; 
 	
 	    public invariant status == UNINIT || status == SIGNED;
 	    
@@ -64,7 +64,7 @@ class Token {
 	
 	//@ requires status == UNINIT;
 	//@ requires key2 != 0;
-	//@ assignable state;
+	//-RAC@ assignable state;
 	//@ ensures status == SIGNED;
 	//@ ensures check(key1, key2);
 	//@ signals (Exception) false;

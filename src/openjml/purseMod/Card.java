@@ -3,16 +3,16 @@
 import java.util.Random;
 
 final class Card {
-	//@ public model Object state;
+	//-RAC@ public model Object state;
 
 	// private
-	  /*@ spec_public */ int master_attempts=0; //@ in state;
+	  /*@ spec_public */ int master_attempts=0; //-RAC@ in state;
 	  // private 
-	  /*@ spec_public */ int basic_attempts=0; //@ in state;
+	  /*@ spec_public */ int basic_attempts=0; //-RAC@ in state;
 	  //private 
-	  /*@ spec_public */ byte master_pin[]=new byte[8]; //@ in state;
+	  /*@ spec_public */ byte master_pin[]=new byte[8]; //-RAC@ in state;
 	  //private 
-	  /*@ spec_public */ byte basic_pin[]=new byte[4]; //@ in state;
+	  /*@ spec_public */ byte basic_pin[]=new byte[4]; //-RAC@ in state;
 
 	  	//private 
 	  	/*@ spec_public */ Token loaded[]=new Token[16];   
@@ -20,13 +20,13 @@ final class Card {
 	    /*@ spec_public */ Token payed[]=new Token[16];
 	    
 	    //private
-	  Random random=new Random(0); //@ in state;
+	  Random random=new Random(0); //-RAC@ in state;
 	  //private 
-	  /*@ spec_public */ int cardid=random.nextInt(); //@ in state;
+	  /*@ spec_public */ int cardid=random.nextInt(); //-RAC@ in state;
 	  // error 2
 	  // fix 2 private /*@ spec_public */ int amount=-1;
 	  //private 
-	  /*@ spec_public */ int amount=0; //@ in state;
+	  /*@ spec_public */ int amount=0; //-RAC@ in state;
 	  //private 
 	  static final int key1=12944557;
 	  //private
@@ -155,8 +155,9 @@ final class Card {
 	    
 	    // after construction, the card is still uninitialised
 	    // constructor will not throw an exception
-	    /*@ assignable basic_pin[*], master_pin[*], this.state;
-	        ensures (\forall int i; 0 <= i && i < basic_pin.length; basic_pin[i] == -1); 
+      //-RAC@ assignable basic_pin[*], master_pin[*], this.state;
+      //+RAC@ assignable basic_pin[*], master_pin[*];
+	    /*@    ensures (\forall int i; 0 <= i && i < basic_pin.length; basic_pin[i] == -1); 
 	        ensures (\forall int i; 0 <= i && i < master_pin.length; master_pin[i] == -1);
 	        ensures status == UNINIT; 
 	        // ILLEGAL postcondition: ensures basic_pin == \old(basic_pin) && master_pin == \old(master_pin);
