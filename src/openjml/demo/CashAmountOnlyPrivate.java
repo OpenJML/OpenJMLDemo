@@ -4,7 +4,7 @@
  * Daniel M. Zimmerman
  */
 
-
+// THIS EXAMPLE HAS ERRORS IN THE INVARIANTS
 
 /**
  * A class that represents a quantity of (U.S.) cash in dollars 
