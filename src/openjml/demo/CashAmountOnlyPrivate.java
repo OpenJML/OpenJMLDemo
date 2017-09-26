@@ -47,7 +47,7 @@
    * @param the_dollars The number of dollars.
    * @param the_cents The number of cents.
    */
-  public CashAmountOnlyPrivate(final int the_dollars, final int the_cents) {
+  /*@ pure */ public CashAmountOnlyPrivate(final int the_dollars, final int the_cents) {
     my_dollars = the_dollars;
     my_cents = the_cents;
   }
