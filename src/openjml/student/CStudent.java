@@ -17,14 +17,17 @@ class CStudent implements Student {
         status = bachelor;
     }
 
+    //@ pure
     public String getName() {
         return name;
     }
 
+    //@ pure
     public int getStatus() {
         return status;
     }
 
+    //@ pure
     public int getCredits() {
         return credits;
     }
