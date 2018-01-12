@@ -15,7 +15,7 @@
  * @author Daniel M. Zimmerman
  * @version 2013-10-17
  */
-/*@ code_bigint_math */
+/*@ code_bigint_math spec_bigint_math */
 public class CashAmount { 
   
   // invariants for sane amounts of dollars and cents
@@ -43,7 +43,7 @@ public class CashAmount {
   //@ private represents cents = my_cents;
   
   //@ requires -CENTS_IN_DOLLAR < the_cents && the_cents < CENTS_IN_DOLLAR;
-  //@ requires (the_cents < 0 ==> the_dollars <= 0) && (the_dollars < 0 ==> the_cents <= 0);
+  //@ requires (the_cents < 0 ==> the_dollars <= 0) && ((\lbl DLLR the_dollars) < 0 ==> (\lbl CENTS the_cents) <= 0);
   //@ requires (the_cents > 0 ==> the_dollars >= 0) && (the_dollars > 0 ==> the_cents >= 0);
   //@ ensures dollars() == the_dollars;
   //@ ensures cents() == the_cents;
@@ -62,7 +62,7 @@ public class CashAmount {
    * @return a new CashAmount representing the negation of this
    * CashAmount.
    */
-  //@ ensures \result.dollars() == -dollars();
+  //@ ensures (\lbl FDLL \result.dollars()) == (\lbl NDLL -dollars());
   //@ ensures \result.cents() == -cents();
   //@ pure
   public CashAmount negate() {
