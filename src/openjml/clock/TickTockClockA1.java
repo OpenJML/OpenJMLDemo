@@ -18,7 +18,6 @@ public class TickTockClockA1 {
 	//@ spec_public
 	protected int second; //@ in _time_state;
 
-	//@ assignable _time_state; 
 	//@ ensures getHour() == 12 && getMinute() == 0 && getSecond() == 0;
 	public /*@ pure @*/ TickTockClockA1() {
 		hour = 12; minute = 0; second = 0;

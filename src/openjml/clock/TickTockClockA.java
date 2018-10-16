@@ -15,7 +15,6 @@ public class TickTockClockA {
 	//@ protected invariant 0 <= second && second <= 59;
 	protected int second; //@ in _time_state;
 
-	//@ assignable _time_state; 
 	//@ ensures getHour() == 12 && getMinute() == 0 && getSecond() == 0;
 	public /*@ pure @*/ TickTockClockA() {
 		hour = 12; minute = 0; second = 0;

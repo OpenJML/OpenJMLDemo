@@ -46,7 +46,8 @@ abstract class BeanCan {
 	}
     }
 
-    /*@ requires num_black + num_white >= 1;
+    /*@ public normal_behavior
+        requires num_black + num_white >= 1;
         ensures (num_white > 0 && num_black > 0) ==> 
                      (\result == WHITE || \result == BLACK);
         ensures num_white == 0 ==> \result == BLACK;

@@ -5,7 +5,7 @@ public class LookupScale {
 	//@ invariant (\forall int k; k>0 && k<this.values.length; (\forall int kk; 0<=kk && kk < k; this.values[kk] <= this.values[k]));
 	
 	//@ requires values.length > 1;
-	//@ requires (\forall int k; k>0 && k<this.values.length; (\forall int kk; 0<=kk && kk < k; this.values[kk] <= this.values[k]));
+	//@ requires (\forall int k; k>0 && k<values.length; (\forall int kk; 0<=kk && kk < k; values[kk] <= values[k]));
 	//@ ensures this.values == values;
 	LookupScale(int[] values) {
 		this.values = values;
@@ -14,7 +14,7 @@ public class LookupScale {
 	//@ requires size > 1;
 	//@ requires min < max;
 	//@ ensures this.values.length == size;
-	//@ assignable this.values[*], this.values;
+	//@ pure
 	LookupScale(int min, int max, int size) {
 		this.values = new int[size];
 		int chunk = (max-min)/(size - 1);
