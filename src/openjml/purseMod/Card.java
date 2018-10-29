@@ -155,8 +155,6 @@ final class Card {
 	    
 	    // after construction, the card is still uninitialised
 	    // constructor will not throw an exception
-      //-RAC@ assignable basic_pin[*], master_pin[*], this.state;
-      //+RAC@ assignable basic_pin[*], master_pin[*];
 	    /*@    ensures (\forall int i; 0 <= i && i < basic_pin.length; basic_pin[i] == -1); 
 	        ensures (\forall int i; 0 <= i && i < master_pin.length; master_pin[i] == -1);
 	        ensures status == UNINIT; 

@@ -36,25 +36,7 @@ public class CardTest {
 
 		// rerun and continue
 		
-		// insert card in terminal
-		
-		terminal.insertCard(card);
-		
-        // note there is an error in clearPin(), called in insertCard(), but this is not detected here,
-		// because all elements in pin_pos are still at their initial values
-		
-		// enter value to initialise pin code (1 2 3 4 5 6 7 8)
-		for (byte i = 0; i < 8; i++){
-			terminal.enterDigit(i);
-		}
-		
-		// initialise card
-		try {terminal.initCard();} catch (Exception e) {};
-		
-		// make 16 loads (tokens fit in original loaded array)
-		for (int i = 0; i < 16; i++) {
-			try {terminal.load(i);} catch (Exception e) {};
-		} 
+		sub1(terminal,card);
 		
 		// Error 3 detected
 		// JMLInternalNormalPostconditionError: by method Token.sign
@@ -68,8 +50,7 @@ public class CardTest {
 		
 		// rerun and continue 
 		
-		// make 17th load, loaded array should be expanded
-		try {terminal.load(24);} catch (Exception e) {};
+		sub2(terminal,card);
 		
 		// Error 4 detected
 		// JMLInternalExceptionalPostconditionError: by method Card.append regarding specifications at
@@ -85,31 +66,9 @@ public class CardTest {
 
 		// rerun and continue
 		
-		// make payment
-		try {terminal.pay(26);} catch (Exception e) {};
-		
-		// Error 5 detected
-		
-		// JMLInternalNormalPostconditionError: by method Card.pay
-		// at purse.Card.pay(CardTest.java:5279)
-		// at purse.Terminal.internal$pay(CardTest.java:6331)
-		// at purse.Terminal.pay(CardTest.java:9048)
-		// at purse.CardTest.internal$main(CardTest.java:11941)
-		// at purse.CardTest.main(CardTest.java:12223)
-		// -> violation of postcondition
-        // ensures (\exists int i; 0 <= i && i < payed.length; payed[i] != null &&
-        // payed[i].getAmount() == amount &&
-        // payed[i].getOwner() == payee);
-		
-		// fix 5: append payment token to payed
+		sub3(terminal,card);
 
-		// rerun and continue
-		
-		// remove card from terminal and insert it again
-		terminal.ejectCard();
-		terminal.insertCard(card);
-		
-		// Error 6 detected
+        // Error 6 detected
 		// JMLInternalExceptionalPostconditionError: by method Terminal.clearPin regarding specifications at
 		// File "..\..\..\workspace\Assignment 1\src\purse\CardTest.java", line 504, character 41, when
 		//	thrown is java.lang.ArrayIndexOutOfBoundsException: 8
@@ -122,67 +81,133 @@ public class CardTest {
 
 		// rerun and continue
 		
-		// enter incorrect pincode
-		for (int i = 0; i < 8; i++){
-			terminal.enterDigit((byte)1);
-		}
+		sub4(terminal,card);
+		
+		sub5(terminal,card);
+		
+		// Now the whole application completes successfully
+		
 
-		// make 2 pay attempts with incorrect pin code
-		
-		try {terminal.pay(1);} catch (CardException e){};
-		try {terminal.pay(1);} catch (CardException e){};		
-		
-		// make 3rd pay attempt with incorrect pin code -> card becomes temporarily blocked
-		try {terminal.pay(1);} catch (CardException e){};
-		
-		// JMLInternalExceptionalPostconditionError: by method Card.pay regarding specifications at
-		// File "..\..\..\workspace\Assignment 1\src\purse\CardTest.java", line 323, character 58, when
-		//	thrown is purse.CardException: invalid pin
-		// at purse.Terminal.pay(CardTest.java:9039)
-		// at purse.CardTest.internal$main(CardTest.java:11937)
-		// at purse.CardTest.main(CardTest.java:12213)
-		// -> violation of
-		//   signals (CardException) basic_attempts == 3 ? status == TEMP_BLOCKED : status == \old(status);
+	}
+	
+	public static void sub1(Terminal terminal, Card  card) {
+       // insert card in terminal
+        
+        terminal.insertCard(card);
+        
+        // note there is an error in clearPin(), called in insertCard(), but this is not detected here,
+        // because all elements in pin_pos are still at their initial values
+        
+        // enter value to initialise pin code (1 2 3 4 5 6 7 8)
+        for (byte i = 0; i < 8; i++){
+            terminal.enterDigit(i);
+        }
+        
+        // initialise card
+        try {terminal.initCard();} catch (Exception e) {};
+        
+        // make 16 loads (tokens fit in original loaded array)
+        for (int i = 0; i < 16; i++) {
+            try {terminal.load(i);} catch (Exception e) {};
+        } 
+    }
+	
+	public static void sub2(Terminal terminal, Card  card) {
+	       // make 17th load, loaded array should be expanded
+        try {terminal.load(24);} catch (Exception e) {};
+	}
+	
+	public static void sub3(Terminal terminal, Card card) {
+	       // make payment
+        try {terminal.pay(26);} catch (Exception e) {};
+        
+        // Error 5 detected
+        
+        // JMLInternalNormalPostconditionError: by method Card.pay
+        // at purse.Card.pay(CardTest.java:5279)
+        // at purse.Terminal.internal$pay(CardTest.java:6331)
+        // at purse.Terminal.pay(CardTest.java:9048)
+        // at purse.CardTest.internal$main(CardTest.java:11941)
+        // at purse.CardTest.main(CardTest.java:12223)
+        // -> violation of postcondition
+        // ensures (\exists int i; 0 <= i && i < payed.length; payed[i] != null &&
+        // payed[i].getAmount() == amount &&
+        // payed[i].getOwner() == payee);
+        
+        // fix 5: append payment token to payed
 
-		// original implementation: card only gets blocked when pay is called for 4th time
-		// and even gets blocked when the pin code is correct at this 4th attempt
-		
-		// fix: change code to first check pin code, then increase basic attempts
-		// temporarily block card when basic_attempts becomes 3
+        // rerun and continue
+        
+        // remove card from terminal and insert it again
+        terminal.ejectCard();
+        terminal.insertCard(card);
+        
 
-		// notice: same fix necessary for unlock
-		
-		// rerun and continue
+	}
+	
+	public static void sub4(Terminal terminal, Card card) {
+	       // enter incorrect pincode
+        for (int i = 0; i < 8; i++){
+            terminal.enterDigit((byte)1);
+        }
 
-		// the card is blocked now
-		
-		// try to unlock with incorrect pin code
-		
-		try {terminal.unlock();} catch (CardException e) {};
-		
-		// change pin code to correct pin code
-		terminal.clearPin();
-		for (byte i = 0; i < 8; i++){
-			terminal.enterDigit(i);
-		}
-		
-		// successful unlock
-		try {terminal.unlock();} catch (CardException e) {};
-		
-		// Error 8 
-		
-		// JMLInternalNormalPostconditionError: by method Card.unlock
-		// at purse.Card.unlock(CardTest.java:5534)
-		// at purse.Terminal.internal$unlock(CardTest.java:6309)
-		// at purse.Terminal.unlock(CardTest.java:9294)
-		// at purse.CardTest.internal$main(CardTest.java:11953)
-		// at purse.CardTest.main(CardTest.java:12229)
+        // make 2 pay attempts with incorrect pin code
+        
+        try {terminal.pay(1);} catch (CardException e){};
+        try {terminal.pay(1);} catch (CardException e){};       
+        
+        // make 3rd pay attempt with incorrect pin code -> card becomes temporarily blocked
+        try {terminal.pay(1);} catch (CardException e){};
+        
+        // JMLInternalExceptionalPostconditionError: by method Card.pay regarding specifications at
+        // File "..\..\..\workspace\Assignment 1\src\purse\CardTest.java", line 323, character 58, when
+        //  thrown is purse.CardException: invalid pin
+        // at purse.Terminal.pay(CardTest.java:9039)
+        // at purse.CardTest.internal$main(CardTest.java:11937)
+        // at purse.CardTest.main(CardTest.java:12213)
+        // -> violation of
+        //   signals (CardException) basic_attempts == 3 ? status == TEMP_BLOCKED : status == \old(status);
+
+        // original implementation: card only gets blocked when pay is called for 4th time
+        // and even gets blocked when the pin code is correct at this 4th attempt
+        
+        // fix: change code to first check pin code, then increase basic attempts
+        // temporarily block card when basic_attempts becomes 3
+
+        // notice: same fix necessary for unlock
+        
+        // rerun and continue
+
+	}
+	
+	public static void sub5(Terminal terminal, Card card) {
+       // the card is blocked now
+        
+        // try to unlock with incorrect pin code
+        
+        try {terminal.unlock();} catch (CardException e) {};
+        
+        // change pin code to correct pin code
+        terminal.clearPin();
+        for (byte i = 0; i < 8; i++){
+            terminal.enterDigit(i);
+        }
+        
+        // successful unlock
+        try {terminal.unlock();} catch (CardException e) {};
+        
+        // Error 8 
+        
+        // JMLInternalNormalPostconditionError: by method Card.unlock
+        // at purse.Card.unlock(CardTest.java:5534)
+        // at purse.Terminal.internal$unlock(CardTest.java:6309)
+        // at purse.Terminal.unlock(CardTest.java:9294)
+        // at purse.CardTest.internal$main(CardTest.java:11953)
+        // at purse.CardTest.main(CardTest.java:12229)
         // -> violation of  ensures master_attempts == 0;
-		
-		// fix: add missing assignment
-		
-		// No the whole application completes successfully
-		
+        
+        // fix: add missing assignment
+        
 
 	}
 
