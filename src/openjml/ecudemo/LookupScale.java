@@ -14,7 +14,7 @@ public class LookupScale {
 	//@ requires size > 1;
 	//@ requires min < max;
 	//@ ensures this.values.length == size;
-	//@ assignable \nothing;
+	//@ pure
 	LookupScale(int min, int max, int size) {
 		this.values = new int[size];
 		int chunk = (max-min)/(size - 1);

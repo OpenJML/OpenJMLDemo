@@ -12,7 +12,7 @@ public class LookupTable1d {
 	  @ requires scale.values.length == lookupValues.length;
 	  @ ensures this.scaleHorizontal == scale;
 	  @ ensures this.lookupValues == lookupValues;
-	  @ assignable \nothing;
+	  @ pure
 	  @*/
 	public LookupTable1d(LookupScale scale, int[] lookupValues) {
 		this.scaleHorizontal = scale;

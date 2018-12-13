@@ -22,7 +22,7 @@ public class SensorValue {
 	  @ ensures this.minValue == minValue;
 	  @ ensures this.maxValue == maxValue;
 	  @ ensures this.failSafe == failSafe;
-	  @ assignable \nothing; 
+	  @ pure 
 	  @*/
 	public SensorValue(int failSafe, int minValue, int maxValue) {
 		this.failSafe = failSafe;

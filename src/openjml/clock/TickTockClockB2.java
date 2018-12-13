@@ -26,7 +26,7 @@ public class TickTockClockB2 {
 	//@ public invariant 0 <= second && second <= 59;
 	public int second; //@ in _time_state;
 
-
+	//@
 	//@ ensures getHour() == 12 && getMinute() == 0 && getSecond() == 0;
 	public /*@ pure @*/ TickTockClockB2() {
 		hour = 12; minute = 0; second = 0;
