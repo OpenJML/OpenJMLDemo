@@ -12,7 +12,7 @@ public class ScaleIndex {
 	  @ requires fracPart < 100;
 	  @ ensures this.intPart == intPart;
 	  @ ensures this.fracPart == fracPart;
-	  @ assignable this.intPart, this.fracPart;
+	  @ assignable \nothing;
 	  @*/
 	public ScaleIndex(int intPart, int fracPart) {
 		this.intPart = intPart;

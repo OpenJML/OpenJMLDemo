@@ -14,7 +14,7 @@ public class TickTockClockD {
 	//@ public model int getTime; //@ in _time_state;  // FIXME - this in clause does not seem to matter
 	//@ protected represents getTime = hour*3600 + minute*60 + second;
 
-	//@ assignable _time_state;
+
 	//@ ensures getTime == 12*60*60;
 	public /*@ pure @*/ TickTockClockD() {
 		hour = 12; minute = 0; second = 0;

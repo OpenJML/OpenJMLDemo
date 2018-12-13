@@ -20,7 +20,7 @@ public class TickTockClockC {
 	//@ public model int getSecond;
 	//@ protected represents getSecond = second;
 
-	//@ assignable _time_state;
+
 	//@ ensures getHour == 12 && getMinute == 0 && getSecond == 0;
 	public /*@ pure @*/ TickTockClockC() {
 		hour = 12; minute = 0; second = 0;

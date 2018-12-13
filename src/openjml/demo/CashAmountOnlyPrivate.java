@@ -40,7 +40,7 @@
   //@ requires -100 < the_cents && the_cents < 100;
   //@ requires the_cents <= 0 <==> the_dollars <= 0;
   //@ requires the_cents >= 0 <==> the_dollars >= 0;
-  //@ assignable this.*;
+
   /**
    * Constructs a new CashAmount representing the specified amount of cash.
    * 
