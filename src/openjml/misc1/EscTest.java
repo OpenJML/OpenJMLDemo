@@ -4,7 +4,7 @@ public class EscTest {
 
 	//@ public normal_behavior
 	//@ modifies \nothing;
-    /*@ ensures \result == x+1 ; */
+    /*@ requires x < 1000000; ensures \result == x+1 ; */
     public static int incr(int x){
         x++;
         return x;
