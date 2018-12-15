@@ -84,7 +84,6 @@ class Terminal {
         ensures pin_pos == 0;
         ensures status == EMPTY;
 
-        assignable this.ownerid, pin[*], status;
         signals (Exception) false;
 	 */
 	public Terminal(int ownerid){
