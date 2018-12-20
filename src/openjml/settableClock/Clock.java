@@ -93,7 +93,7 @@ public class Clock {
   /*@ ensures \result <==> 0 <= the_hours && the_hours < HOURS_IN_DAY &&
                            0 <= the_minutes && the_minutes < MINS_IN_HOUR && 
                            0 <= the_seconds && the_seconds < SECS_IN_MIN;
-      public pure helper model boolean legalTime(int the_hours, int the_minutes, int the_seconds);
+      public static pure helper model boolean legalTime(int the_hours, int the_minutes, int the_seconds);
    */
   
   /*@ ensures \result == hours * MINS_IN_HOUR * SECS_IN_MIN + 
