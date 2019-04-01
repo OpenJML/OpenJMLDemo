@@ -74,7 +74,7 @@ class Taxpayer {
    /* The line below makes explicit the assumption that a new Taxpayer is not 
     * married to anyone yet. A bit silly of course, but we need this to keep 
     * ESC happy. */
-   //@ assume (\forall Taxpayer p; p.spouse != this); 
+   //@ assume (\forall Taxpayer p; p != null ==> p.spouse != this); 
  } 
 
  /* METHODS */
