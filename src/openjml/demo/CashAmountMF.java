@@ -77,9 +77,6 @@
   public CashAmountMF increase(final CashAmountMF the_amount) {
 	    int new_dollars = my_dollars + the_amount.my_dollars;
 	    int new_cents = my_cents + the_amount.my_cents;
-		  //@ ghost int i = (\lbl MD my_dollars) + (\lbl MC my_cents) + (\lbl AD the_amount.my_dollars) + (\lbl AC the_amount.my_cents) + (\lbl RD new_dollars) + (\lbl RC new_cents);
-	    //@ ghost int j = (\lbl MT total) + (\lbl ATT the_amount.total);
-	    //@ ghost boolean b = (\lbl SAME this == the_amount);
 	    
 	    if (new_cents <= -CENTS_IN_DOLLAR) {
 	      new_cents = new_cents + CENTS_IN_DOLLAR;
@@ -104,12 +101,11 @@
   //@ requires this != the_amount;
   //@ assignable this.*;
   //@ ensures dollars*100 + cents == (the_amount.dollars*100 + the_amount.cents) + \old(dollars*100+cents);
-  //@ ensures (\lbl RT this.total) == (\lbl PT \old(this.total)) + (\lbl AT the_amount.total);
+  //@ ensures this.total == \old(this.total) + the_amount.total;
   public void add(final CashAmountMF the_amount) {
 	    int new_dollars = my_dollars + the_amount.my_dollars;
 	    int new_cents = my_cents + the_amount.my_cents;
 	    
-	    //@ ghost boolean same = (\lbl SAME (this == the_amount));
 	    if (new_cents <= -CENTS_IN_DOLLAR) {
 	      new_cents = new_cents + CENTS_IN_DOLLAR;
 	      new_dollars = new_dollars - 1;
@@ -129,7 +125,8 @@
 	    
 	    my_dollars = new_dollars;
 	    my_cents = new_cents;
-	  }
+	    //@ show \old(dollars*100+cents);
+  }
 	  
   /**
    * Decreases this CashAmount by the specified CashAmount.
