@@ -90,14 +90,14 @@ final class Card {
 	    /*@ spec_public */ Token payed[]=new Token[16];
 	    
 	    // requirements on loaded and payed
-	    /*@ public invariant loaded != null;
-	        public invariant payed != null;
+	    /*@ public invariant \lbl I1 loaded != null;
+	        public invariant \lbl I2 payed != null;
 	        
 	        // tokens are stored consecutively
-	        public invariant (\exists int i; 0 <= i && i <= loaded.length;
+	        public invariant \lbl I3 (\exists int i; 0 <= i && i <= loaded.length;
 	                   (\forall int j; 0 <= j && j < i; loaded[j] != null) &&
 	                   (\forall int k; i <= k && k < loaded.length; loaded[k] == null));
-	        public invariant (\exists int i; 0 <= i && i <= payed.length;
+	        public invariant \lbl I4 (\exists int i; 0 <= i && i <= payed.length;
 	                   (\forall int j; 0 <= j && j < i; payed[j] != null) &&
 	                   (\forall int k; i <= k && k < payed.length; payed[k] == null));
 
@@ -153,12 +153,17 @@ final class Card {
 	        signals (Exception) false;     
 	     */
 	    public Card(){
+	        //@ show loaded, payed;
 	    	// error 1
 	    	// fix 1 for(int i=0;i<8;i++) this.basic_pin[i]=-1;
 	    	// fix 1 for(int i=0;i<4;i++) this.master_pin[i]=-1;
 	        for(int i=0;i<basic_pin.length;i++) this.basic_pin[i]=-1;
 	    	for(int i=0;i<master_pin.length;i++) this.master_pin[i]=-1;
 	    	//@ set status = UNINIT;
+	    	assert (loaded != null) ;
+	    	assert (payed!=null);
+	    	//@ show loaded, payed;
+
 	    }
 	  
 	    // look up functions
