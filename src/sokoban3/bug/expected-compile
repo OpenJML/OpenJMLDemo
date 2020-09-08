@@ -1,0 +1,76 @@
+RAC-Compiling Board
+RAC-Compiling BoardItem
+RAC-Compiling Position
+RAC-Compiling Game
+RAC-Compiling Player
+Skipping RAC of GameGUI (SkipRac annotation)
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:182: error: code too large for try statement
+  boolean movePlayer ( /*@ non_null @*/ Position newPosition) {
+          ^
+error: code too large
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:240: error: code too large for try statement
+  boolean movePlayerMultiStep ( /*@ non_null @*/ Position newPosition) {
+          ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:6: error: code too large for try statement
+ *   - a ground that can be marked. Marked ground squares have to be covered with
+                                                                           ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:255: error: code too large for try statement
+	    		if (!movePlayer(new Position(player.position.x,i))) return false;
+	    		                ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:7: error: code too large for try statement
+ *     crates to win the game
+          ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:6: error: code too large for try statement
+ *   - a ground that can be marked. Marked ground squares have to be covered with
+                                                           ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:152: error: code too large for try statement
+    @   requires !player.position.isValidNextPosition(newPosition) || !board.onBoard(newPosition);
+                                                                   ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:159: error: code too large for try statement
+    @   requires !board.items[newPosition.x][newPosition.y].ground;
+                 ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:167: error: code too large for try statement
+    @   requires !board.items[newPosition.x][newPosition.y].crate;
+                 ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:176: error: code too large for try statement
+    @   requires board.items[newPosition.x][newPosition.y].crate;
+                                                          ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:255: error: code too large for try statement
+	    		if (!movePlayer(new Position(player.position.x,i))) return false;
+	    		               ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:153: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+                                       ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:161: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+                                       ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:153: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+        ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:151: error: code too large for try statement
+  /*@ normal_behavior
+      ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:161: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+        ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:156: error: code too large for try statement
+    @ normal_behavior
+      ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:170: error: code too large for try statement
+    @   ensures player.position == newPosition;
+        ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:163: error: code too large for try statement
+    @ normal_behavior
+      ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:172: error: code too large for try statement
+    @ normal_behavior
+      ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:240: error: code too large for try statement
+  boolean movePlayerMultiStep ( /*@ non_null @*/ Position newPosition) {
+                                                                       ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:239: error: code too large
+  //@ skipesc
+      ^
+Note: $SPECS\java5\java\util\Arrays.jml uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+23 errors

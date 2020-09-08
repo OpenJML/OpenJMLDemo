@@ -1,0 +1,55 @@
+RAC-Compiling Board
+RAC-Compiling BoardItem
+RAC-Compiling Position
+RAC-Compiling Game
+RAC-Compiling Player
+Skipping RAC of GameGUI (SkipRac annotation)
+../../OpenJMLDemo/src/sokoban3/src/Game.java:152: error: code too large for try statement
+    @   requires !player.position.isValidNextPosition(newPosition) || !board.onBoard(newPosition);
+                                                                   ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:159: error: code too large for try statement
+    @   requires !board.items[newPosition.x][newPosition.y].ground;
+                 ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:167: error: code too large for try statement
+    @   requires !board.items[newPosition.x][newPosition.y].crate;
+                 ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:176: error: code too large for try statement
+    @   requires board.items[newPosition.x][newPosition.y].crate;
+                                                          ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:255: error: code too large for try statement
+	    		if (!movePlayer(new Position(player.position.x,i))) return false;
+	    		               ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:153: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+                                       ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:161: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+                                       ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:153: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+        ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:151: error: code too large for try statement
+  /*@ normal_behavior
+      ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:161: error: code too large for try statement
+    @   ensures !\result && \old(player.position) == player.position;
+        ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:156: error: code too large for try statement
+    @ normal_behavior
+      ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:170: error: code too large for try statement
+    @   ensures player.position == newPosition;
+        ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:163: error: code too large for try statement
+    @ normal_behavior
+      ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:172: error: code too large for try statement
+    @ normal_behavior
+      ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:240: error: code too large for try statement
+  boolean movePlayerMultiStep ( /*@ non_null @*/ Position newPosition) {
+          ^
+../../OpenJMLDemo/src/sokoban3/src/Game.java:240: error: code too large for try statement
+  boolean movePlayerMultiStep ( /*@ non_null @*/ Position newPosition) {
+                                                                       ^
+16 errors

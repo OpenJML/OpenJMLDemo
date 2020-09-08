@@ -1,0 +1,8 @@
+OUT:
+
+ERR:
+Exception in thread "main" java.lang.IllegalArgumentException: input == null!
+	at javax.imageio.ImageIO.read(Unknown Source)
+	at GameGUI$MyPanel.<init>(GameGUI.java:91)
+	at GameGUI.<init>(GameGUI.java:23)
+	at Game.main(Game.java:299)

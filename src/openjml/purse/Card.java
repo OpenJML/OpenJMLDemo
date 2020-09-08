@@ -88,20 +88,20 @@ final class Card {
 	  	/*@ spec_public */ Token loaded[]=new Token[16];   
 	    //private 
 	    /*@ spec_public */ Token payed[]=new Token[16];
+
 	    
 	    // requirements on loaded and payed
-	    /*@ public invariant \lbl I1 loaded != null;
-	        public invariant \lbl I2 payed != null;
+	    /*@ public invariant loaded != null;
+	        public invariant payed != null;
 	        
 	        // tokens are stored consecutively
-	        public invariant \lbl I3 (\exists int i; 0 <= i && i <= loaded.length;
+	        public invariant (\exists int i; 0 <= i && i <= loaded.length;
 	                   (\forall int j; 0 <= j && j < i; loaded[j] != null) &&
 	                   (\forall int k; i <= k && k < loaded.length; loaded[k] == null));
-	        public invariant \lbl I4 (\exists int i; 0 <= i && i <= payed.length;
+	        public invariant (\exists int i; 0 <= i && i <= payed.length;
 	                   (\forall int j; 0 <= j && j < i; payed[j] != null) &&
 	                   (\forall int k; i <= k && k < payed.length; payed[k] == null));
 
-	      
 	        // list with tokens only increases
 	        public constraint \old(loaded.length) <= loaded.length;
 	        public constraint \old(payed.length) <= payed.length;
@@ -111,7 +111,6 @@ final class Card {
 	                     \old(loaded[i]) != null ==> \old(loaded[i]) == loaded[i]);
 	        public constraint (\forall int i; 0 <= i && i < \old(payed.length);
 	                     \old(payed[i]) != null ==> \old(payed[i]) == payed[i]);
-
 
 	        // every token is unique
 	        public invariant (\forall int i; 0 <= i && i < loaded.length;
@@ -135,7 +134,6 @@ final class Card {
 	                             loaded[i].getTokenID() != payed[k].getTokenID()));
 	        */
 
-	    
 	    // no money lost
 	    
 	    // this cannot be checked by current version of JML
@@ -153,7 +151,6 @@ final class Card {
 	        signals (Exception) false;     
 	     */
 	    public Card(){
-	        //@ show loaded, payed;
 	    	// error 1
 	    	// fix 1 for(int i=0;i<8;i++) this.basic_pin[i]=-1;
 	    	// fix 1 for(int i=0;i<4;i++) this.master_pin[i]=-1;
@@ -162,8 +159,6 @@ final class Card {
 	    	//@ set status = UNINIT;
 	    	assert (loaded != null) ;
 	    	assert (payed!=null);
-	    	//@ show loaded, payed;
-
 	    }
 	  
 	    // look up functions
@@ -215,7 +210,6 @@ final class Card {
 	    // explicit postcondition on the contents of \result
 	    //
 	    // the method cannot terminate with an exception
-	    
 	    // since this is a static method, we do not put any requirements on the status of the card object
 	    /*@ requires array != null;
 	        requires tok != null;
@@ -251,9 +245,7 @@ final class Card {
 	    // tokenid_occurs is called on an array where all non-null values are stores consecutively 
 	    // as the initial fragment
 	    // returns true if and only if the a token with tokenid is contained in array
-	    
 	    // the method will not terminate with an exception
-	    
 	    // since this is a static method, we do not put any requirements on the status of the card object
 	    
 	    /*@ requires array != null;
@@ -273,9 +265,9 @@ final class Card {
 	  
 	    // the method can only be called when the card is active
 	    // status of the card is not changed
-	    
+
 	    // to ensure that all tokens remain unique, tok.getTokenID() should not occur in loaded or payed
-	    
+
 	    // if the token is valid, then the token is added to loaded, and the amount is added to the 
 	    // credits of the card (we can even specify that this is the last non-null token in loaded, 
 	    // but this too much implementation detail)

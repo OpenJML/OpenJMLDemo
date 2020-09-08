@@ -1,0 +1,16 @@
+testfiles\sokoban2\src\Board.java:15: error: cannot find symbol
+  /*@  non_null @*/ public BoardItem[][] items;
+                           ^
+  symbol:   class BoardItem
+  location: class Board
+testfiles\sokoban2\src\Board.java:61: error: cannot find symbol
+    items = new BoardItem[xSize][ySize];
+                ^
+  symbol:   class BoardItem
+  location: class Board
+testfiles\sokoban2\src\Board.java:77: error: cannot find symbol
+            items[x][y] = new BoardItem();
+                              ^
+  symbol:   class BoardItem
+  location: class Board
+3 errors

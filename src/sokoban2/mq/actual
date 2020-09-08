@@ -1,0 +1,88 @@
+Proving methods in Board
+Skipping proof of Board.Board(int,int) (excluded by skipesc)
+Starting proof of Board.onBoard(Position) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Board.onBoard(Position) with prover !!!! - no warnings
+Starting proof of Board.onBoard(int,int) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Board.onBoard(int,int) with prover !!!! - no warnings
+Completed proving methods in Board
+Proving methods in Position
+Starting proof of Position.Position(int,int) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Position.Position(int,int) with prover !!!! - no warnings
+Starting proof of Position.equals(java.lang.Object) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Position.equals(java.lang.Object) with prover !!!! - no warnings
+Starting proof of Position.isValidNextPosition(Position) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Position.isValidNextPosition(Position) with prover !!!! - no warnings
+Starting proof of Position.isValidNextPositionMultiStep(Position) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Position.isValidNextPositionMultiStep(Position) with prover !!!! - no warnings
+Skipping proof of Position.toString() (excluded by skipesc)
+Completed proving methods in Position
+Proving methods in Game
+Starting proof of Game.open(int,int) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Game.open(int,int) with prover !!!! - no warnings
+Starting proof of Game.open(Board,int,int) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Game.open(Board,int,int) with prover !!!! - no warnings
+Starting proof of Game.Game(Board,Player) with prover !!!!
+..\OpenJMLDemoNonPublic\src\sokoban2\src\Game.java:87: warning: The prover cannot establish an assertion (InvariantExit) in method Game
+  Game ( /*@ non_null @*/ Board bbb, /*@ non_null @*/ Player player) {
+  ^
+..\OpenJMLDemoNonPublic\src\sokoban2\src\Game.java:72: warning: Associated declaration
+  //@ public invariant !gameWon ==> !gameStuck;
+             ^
+Completed proof of Game.Game(Board,Player) with prover !!!! - with warnings
+Starting proof of Game.wonGame() with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Game.wonGame() with prover !!!! - no warnings
+Starting proof of Game.stuckGame() with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Game.stuckGame() with prover !!!! - no warnings
+Starting proof of Game.movePlayer(Position) with prover !!!!
+..\OpenJMLDemoNonPublic\src\sokoban2\src\Game.java:222: warning: The prover cannot establish an assertion (Assert) in method movePlayer
+    //@ assert board.ground[newPosition.x][newPosition.y];
+        ^
+Completed proof of Game.movePlayer(Position) with prover !!!! - with warnings
+Skipping proof of Game.movePlayerMultiStep(Position) (excluded by skipesc)
+Skipping proof of Game.toString() (excluded by skipesc)
+Starting proof of Game.main(java.lang.String[]) with prover !!!!
+..\OpenJMLDemoNonPublic\src\sokoban2\src\Game.java:263: warning: Validity is unknown - time or memory limit reached: : Aborted proof: timeout
+  public static void main (String[]args) {
+                     ^
+Completed proof of Game.main(java.lang.String[]) with prover !!!! - TIMEOUT
+Completed proving methods in Game
+Proving methods in Player
+Starting proof of Player.Player(Position) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Player.Player(Position) with prover !!!! - no warnings
+Starting proof of Player.setPosition(Position) with prover !!!!
+Feasibility check #1 - end of preconditions : OK
+Feasibility check #2 - at program exit : OK
+Completed proof of Player.setPosition(Position) with prover !!!! - no warnings
+Skipping proof of Player.toString() (excluded by skipesc)
+Completed proving methods in Player
+Proving methods in GameGUI
+Skipping proof of GameGUI.GameGUI(Game) (excluded by skipesc)
+Proving methods in GameGUI.MyPanel
+Skipping proof of GameGUI.MyPanel.MyPanel(Game) (excluded by skipesc)
+Skipping proof of GameGUI.MyPanel.check() (excluded by skipesc)
+Skipping proof of GameGUI.MyPanel.paintComponent(java.awt.Graphics) (excluded by skipesc)
+Completed proving methods in GameGUI.MyPanel
+Completed proving methods in GameGUI
+4 warnings

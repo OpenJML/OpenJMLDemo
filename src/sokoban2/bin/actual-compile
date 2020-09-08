@@ -1,0 +1,18 @@
+testfiles\sokoban2\src\Board.java:15: error: cannot find symbol
+  /*@  non_null @*/ public BoardItem[][] items;
+                           ^
+  symbol:   class BoardItem
+  location: class Board
+testfiles\sokoban2\src\Board.java:61: error: cannot find symbol
+    items = new BoardItem[xSize][ySize];
+                ^
+  symbol:   class BoardItem
+  location: class Board
+testfiles\sokoban2\src\Board.java:77: error: cannot find symbol
+            items[x][y] = new BoardItem();
+                              ^
+  symbol:   class BoardItem
+  location: class Board
+Note: $SPECS\java5\java\util\Arrays.jml uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 errors

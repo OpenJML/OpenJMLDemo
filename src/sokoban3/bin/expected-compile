@@ -1,0 +1,8 @@
+RAC-Compiling Board
+RAC-Compiling BoardItem
+RAC-Compiling Position
+RAC-Compiling Game
+RAC-Compiling Player
+Skipping RAC of GameGUI (SkipRac annotation)
+Note: $SPECS\java5\java\util\Arrays.jml uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.

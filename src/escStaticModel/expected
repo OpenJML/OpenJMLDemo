@@ -1,0 +1,18 @@
+Proving methods in escStaticModel.Cash
+Starting proof of escStaticModel.Cash.Cash(int) with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of escStaticModel.Cash.Cash(int) with prover !!!! - no warnings
+Starting proof of escStaticModel.Cash.amount() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of escStaticModel.Cash.amount() with prover !!!! - no warnings
+Starting proof of escStaticModel.Cash.loaded() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of escStaticModel.Cash.loaded() with prover !!!! - no warnings
+Starting proof of escStaticModel.Cash.setLoaded() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of escStaticModel.Cash.setLoaded() with prover !!!! - no warnings
+Completed proving methods in escStaticModel.Cash

@@ -1,0 +1,20 @@
+OUT:
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:91: JML invariant is false on leaving method Game.Game(Board,Player)
+  Game ( /*@ non_null @*/ Board board, /*@ non_null @*/ Player player) {
+  ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:76: Associated declaration: ..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:91: 
+  //@ public invariant !gameWon ==> !gameStuck;
+             ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:315: JML invariant is false on entering method GameGUI.GameGUI(Game) from Game.main(java.lang.String[])
+    new GameGUI (g);		// NOTE comment this out for JMLUnitNG part of the homework
+                 ^
+..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:76: Associated declaration: ..\OpenJMLDemoNonPublic\src\sokoban3\src\Game.java:315: 
+  //@ public invariant !gameWon ==> !gameStuck;
+             ^
+
+ERR:
+Exception in thread "main" java.lang.IllegalArgumentException: input == null!
+	at javax.imageio.ImageIO.read(Unknown Source)
+	at GameGUI$MyPanel.<init>(GameGUI.java:85)
+	at GameGUI.<init>(GameGUI.java:23)
+	at Game.main(Game.java:315)
