@@ -2,3 +2,5 @@
 **/benchmarks/
 **/.DS_Store
 **/*.actual
+**/*.actual-compile
+**/*.actual-run
