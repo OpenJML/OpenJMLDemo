@@ -1,67 +1,56 @@
 /*
- * Fall 2013 CSCI181G - Homework 6
- * Static and Runtime Checking
+ * Class exercise from Daniel M. Zimmerman (2013)
  */
 
-
-
-/**
- * A clock that tells 24-hour time. This class is _not_ immutable.
- * 
- * This class needs to be statically verified and may or may not have 
- * errors in its implementation.
- * 
- * @author Daniel M. Zimmerman
- * @author YOUR NAME HERE
- * @version 2013-11-04
- */
 public class Clock {
-  // Useful Constants
   
-  /**
-   * The number of seconds in a minute.
-   */
+  // The number of seconds in a minute.
   public static final int SECS_IN_MIN = 60;
   
-  /**
-   * The number of minutes in an hour.
-   */
+  // The number of minutes in an hour.
   public static final int MINS_IN_HOUR = 60;
   
-  /**
-   * The number of hours in a day.
-   */
+  // The number of hours in a day.
   public static final int HOURS_IN_DAY = 24;
-  
   
   // Instance Fields
   
   /**
    * The current hours on the clock.
    */
-  private int my_hours;
-  //@ in hours;
+  private int my_hours; //@ in hours;
   //@ public model int hours;
   //@ private represents hours = my_hours;
-  //@ public invariant 0 <= hours && hours < HOURS_IN_DAY;
   
   /**
    * The current minutes on the clock.
    */
-  private int my_minutes;
-  //@ in minutes;
+  private int my_minutes; //@ in minutes;
   //@ public model int minutes;
   //@ private represents minutes = my_minutes;
-  //@ public invariant 0 <= minutes && minutes < MINS_IN_HOUR;
   
   /**
    * The current seconds on the clock.
    */
-  private int my_seconds;
-  //@ in seconds;
+  private int my_seconds; //@ in seconds;
   //@ public model int seconds;
   //@ private represents seconds = my_seconds;
-  //@ public invariant 0 <= seconds && seconds < SECS_IN_MIN;
+
+  // model queries for legal times and total number of seconds on the clock
+  
+  /*@ ensures \result <==> 0 <= the_hours < HOURS_IN_DAY &&
+                           0 <= the_minutes < MINS_IN_HOUR && 
+                           0 <= the_seconds < SECS_IN_MIN;
+      public static pure helper model boolean legalTime(int the_hours, int the_minutes, int the_seconds);
+   */
+  
+  /*@ ensures \result == hours * MINS_IN_HOUR * SECS_IN_MIN + 
+                         minutes * SECS_IN_MIN + seconds;
+      public pure helper model int totalSeconds();
+   */
+  
+
+  //@ public invariant legalTime(hours, minutes, seconds);
 
   // Constructor
   
@@ -79,27 +68,11 @@ public class Clock {
    */
   //@ requires legalTime(the_hours, the_minutes, the_seconds);
   //@ ensures hours == the_hours && minutes == the_minutes && seconds == the_seconds;
-  //@ assignable \everything;
   public Clock(final int the_hours, final int the_minutes, final int the_seconds) {
     my_hours = the_hours;
     my_minutes = the_minutes;
     my_seconds = the_seconds;
   }
-  
-  // Queries
-  
-  // model queries for legal times and total number of seconds on the clock
-  
-  /*@ ensures \result <==> 0 <= the_hours && the_hours < HOURS_IN_DAY &&
-                           0 <= the_minutes && the_minutes < MINS_IN_HOUR && 
-                           0 <= the_seconds && the_seconds < SECS_IN_MIN;
-      public static pure helper model boolean legalTime(int the_hours, int the_minutes, int the_seconds);
-   */
-  
-  /*@ ensures \result == hours * MINS_IN_HOUR * SECS_IN_MIN + 
-                         minutes * SECS_IN_MIN + seconds;
-      public pure helper model int totalSeconds();
-   */
   
   /**
    * @return The current hours on the clock.
@@ -144,6 +117,7 @@ public class Clock {
    * @param the_other_clock The other Clock to check.
    * @return true if this Clock has an earlier time, false otherwise.
    */
+  //@ ensures \result <==> difference(the_other_clock) < 0;
   public /*@ pure */ boolean earlier(final Clock the_other_clock) {
     return difference(the_other_clock) < 0;
   }
@@ -177,7 +151,7 @@ public class Clock {
    * 
    * @param the_hours The new value for hours.
    */
-  //@ requires 0 <= the_hours && the_hours < HOURS_IN_DAY;
+  //@ requires 0 <= the_hours < HOURS_IN_DAY;
   //@ modifies hours;
   //@ ensures hours == the_hours;
   //@ signals_only \nothing;
@@ -190,7 +164,7 @@ public class Clock {
    * 
    * @param the_minutes The new value for minutes.
    */
-  //@ requires 0 <= the_minutes && the_minutes < MINS_IN_HOUR;
+  //@ requires 0 <= the_minutes < MINS_IN_HOUR;
   //@ modifies minutes;
   //@ ensures minutes == the_minutes;
   //@ signals_only \nothing;
@@ -203,7 +177,7 @@ public class Clock {
    * 
    * @param the_seconds The new value for seconds.
    */
-  //@ requires 0 <= the_seconds && the_seconds < SECS_IN_MIN;
+  //@ requires 0 <= the_seconds < SECS_IN_MIN;
   //@ modifies seconds;
   //@ ensures seconds == the_seconds;
   //@ signals_only \nothing;
