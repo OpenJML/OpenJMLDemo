@@ -9,7 +9,7 @@ public class ArrayStore {
 	
 	public static void test() {
 		Object[] a = new Integer[10];
-		a[0] = new Boolean(true);
+		a[0] = Boolean.TRUE;
 	}
 	
 	public static void test2() {

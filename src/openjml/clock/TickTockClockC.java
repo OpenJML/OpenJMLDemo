@@ -1,15 +1,15 @@
 package openjml.clock;
 public class TickTockClockC {
-    //@ public nullable model JMLDataGroup _time_state;
+    //@ public nullable model JMLDataGroup _time_state; in getHour, getMinute, getSecond;
 
 	//@ protected invariant 0 <= hour && hour <= 23;
-	protected int hour; //@ in _time_state;
+	protected int hour; //@ in _time_state, getHour;
 
 	//@ protected invariant 0 <= minute && minute <= 59;
-	protected int minute; //@ in _time_state;
+	protected int minute; //@ in _time_state, getMinute;
 
 	//@ protected invariant 0 <= second && second <= 59;
-	protected int second; //@ in _time_state;
+	protected int second; //@ in _time_state, getSecond;
 
 	//@ public model int getHour;
 	//@ protected represents getHour = hour;

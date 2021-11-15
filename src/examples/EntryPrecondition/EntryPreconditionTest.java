@@ -1,4 +1,4 @@
-import org.jmlspecs.utils.*;
+import org.jmlspecs.runtime.*;
 
 public class EntryPreconditionTest {
 

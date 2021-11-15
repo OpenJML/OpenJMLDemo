@@ -1,6 +1,6 @@
 package openjml.clock;
 public class TickTockClockD {
-    //@ public nullable model JMLDataGroup _time_state;
+    //@ public nullable model JMLDataGroup _time_state; //@ in getTime;
 
 	//@ protected invariant 0 <= hour && hour <= 23;
 	protected int hour; //@ in _time_state;
@@ -11,7 +11,7 @@ public class TickTockClockD {
 	//@ protected invariant 0 <= second && second <= 59;
 	protected int second; //@ in _time_state;
 
-	//@ public model int getTime; //@ in _time_state;  // FIXME - this in clause does not seem to matter
+	//@ public model int getTime;
 	//@ protected represents getTime = hour*3600 + minute*60 + second;
 
 	//@
