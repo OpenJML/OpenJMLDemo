@@ -90,6 +90,7 @@ public class GiftCard {
   //@ assignable balance, the_other_card.balance;
   //@ also
   //@ requires the_other_card == this;
+  //@ assignable \nothing;
   //@ ensures balance == \old(balance);
   public void absorb(final GiftCard the_other_card) {
     if (the_other_card != this) {

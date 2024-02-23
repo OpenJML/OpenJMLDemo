@@ -46,7 +46,7 @@ public class TickTockClockB1 {
       @ also
       @  requires getSecond() == 59;
       @  assignable _time_state;
-      @  ensures getSecond() == 0;
+      @  ensures getSecond() == 0; // FIXME: using getSecond() instead of second makes the invariant incorrectly succeed -- and why doesn't it make the entrance invariant fail?
       @  ensures (* hours and minutes are updated appropriately *);
       @*/
 	public void tick() {
