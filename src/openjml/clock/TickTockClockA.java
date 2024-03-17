@@ -4,7 +4,7 @@
 
 package openjml.clock;
 public class TickTockClockA {
-    //@ public model JMLDataGroup _time_state;
+    //@ public model \datagroup _time_state;
 
 	//@ protected invariant 0 <= hour && hour <= 23;
 	protected int hour; //@ in _time_state;

@@ -17,7 +17,7 @@ class CStudent implements Student {
         status = bachelor;
     }
 
-    //@ pure
+    //@ spec_pure
     public String getName() {
         return name;
     }

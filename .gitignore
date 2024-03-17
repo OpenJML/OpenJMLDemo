@@ -4,3 +4,4 @@
 **/*.actual
 **/*.actual-compile
 **/*.actual-run
+**/*.class
