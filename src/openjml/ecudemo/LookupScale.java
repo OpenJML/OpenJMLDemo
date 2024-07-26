@@ -12,16 +12,17 @@ public class LookupScale {
 	}
 	
 	//@ requires size > 1;
-	//@ requires min < max;
+	//@ requires 0 <= min < max;
 	//@ ensures this.values.length == size;
 	//@ pure
 	LookupScale(int min, int max, int size) {
 		this.values = new int[size];
 		int chunk = (max-min)/(size - 1);
-		//@ assert chunk >= 0;
+		//@ assert chunk >= 0; // Could fail if max is very large, min is very negative and size == 2
 		this.values[0] = min;
-		/*@ loop_invariant i>=1 && i<=this.values.length;
-		    loop_invariant (\forall int k; k>0 && k<i; this.values[k-1] <= this.values[k]);
+		/*@ loop_invariant 1 <= i <= this.values.length;
+            loop_invariant (\forall int k; 0<k<i; this.values[k-1] <= this.values[k]);
+            loop_invariant (\forall int k; 0<=k<i; this.values[k] == min + chunk*k);
 		    decreases this.values.length - i;
 		  @*/
 		for(int i=1; i<this.values.length; i++) {

@@ -13,7 +13,7 @@ public class Types {
 		//@ ghost boolean b1 = (\lbl A \type(Integer) <: \type(Number));// true
 		//@ ghost boolean b2 = (\lbl B \type(java.util.ArrayList<Integer>) <: \type(java.util.List<Integer>)); // true
 		//@ ghost boolean b3 = (\lbl C \type(java.util.ArrayList<Integer>) <: \type(java.util.List<Number>)); // false
-		//@ ghost boolean b5 = (\lbl E \erasure(\type(java.util.ArrayList)) <: \erasure(\type(java.util.List))); // true
+		//@ ghost boolean b5 = (\lbl E \erasure(\type(java.util.ArrayList<Integer>)) <: \erasure(\type(java.util.List<Integer>))); // true
 		//@ assert b1 && b2 && !b3 && b5; 
 		//@ assert false; // To be sure of feasibility and so that labels are printed
 	}
