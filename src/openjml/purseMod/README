@@ -1,0 +1,2 @@
+The precondition of clearPin() does not hold when it is first called.
+The second report of a false precondition is from checking assumptions inside of clearPin() -- that report does not occur with --no-rac-check-assumptions

@@ -21,7 +21,7 @@ public class Types {
 	public <T> void types(java.util.List<T> a) {  // Should be able to prove the third line, given the first
 		//@ assume \typeof(a) == \type(java.util.List<Integer>);
 		/*@ nullable */ T t = a.get(0);
-		/*@ nullable */ Integer i = (Integer)t;
+		/*@ nullable */ Integer i = (Integer)t; // Should be provable with the assumption
 	}
 		
 	public <T> void types5(java.util.List<T> a) { // Should be able to prove the third line, given the first
