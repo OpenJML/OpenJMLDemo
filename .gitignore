@@ -2,7 +2,6 @@
 **/benchmarks/
 **/.DS_Store
 **/*actual
-**/*.actual
-**/*.actual-compile
-**/*.actual-run
+**/*actual-compile
+**/*actual-run
 **/*.class
