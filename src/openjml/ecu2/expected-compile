@@ -1,0 +1,40 @@
+../../OpenJMLDemo/src/openjml/ecu2/SensorValue.java:25: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.failSafe, this.minValue, this.maxValue, this.value; 
+	               ^
+../../OpenJMLDemo/src/openjml/ecu2/SensorValue.java:25: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.failSafe, this.minValue, this.maxValue, this.value; 
+	                              ^
+../../OpenJMLDemo/src/openjml/ecu2/SensorValue.java:25: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.failSafe, this.minValue, this.maxValue, this.value; 
+	                                             ^
+../../OpenJMLDemo/src/openjml/ecu2/SensorValue.java:25: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.failSafe, this.minValue, this.maxValue, this.value; 
+	                                                            ^
+../../OpenJMLDemo/src/openjml/ecu2/LookupScale.java:21: error: References to 'this' are not permitted in constructor assignable clauses: this
+	    assignable this.values[*], this.values;
+	               ^
+../../OpenJMLDemo/src/openjml/ecu2/LookupScale.java:21: error: References to 'this' are not permitted in constructor assignable clauses: this
+	    assignable this.values[*], this.values;
+	                               ^
+../../OpenJMLDemo/src/openjml/ecu2/LookupTable1d.java:15: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.lookupValues, this.scaleX;
+	               ^
+../../OpenJMLDemo/src/openjml/ecu2/LookupTable1d.java:15: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.lookupValues, this.scaleX;
+	                                  ^
+../../OpenJMLDemo/src/openjml/ecu2/ScaleIndex.java:24: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.intPart, this.fracPart, this.size;
+	               ^
+../../OpenJMLDemo/src/openjml/ecu2/ScaleIndex.java:24: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.intPart, this.fracPart, this.size;
+	                             ^
+../../OpenJMLDemo/src/openjml/ecu2/ScaleIndex.java:24: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @ assignable this.intPart, this.fracPart, this.size;
+	                                            ^
+../../OpenJMLDemo/src/openjml/ecu2/LookupTableLinear.java:16: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @   assignable this.startValue, this.range;
+	                 ^
+../../OpenJMLDemo/src/openjml/ecu2/LookupTableLinear.java:16: error: References to 'this' are not permitted in constructor assignable clauses: this
+	  @   assignable this.startValue, this.range;
+	                                  ^
+13 errors

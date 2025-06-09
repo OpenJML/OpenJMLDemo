@@ -13,7 +13,7 @@ public class LookupTableLinear {
 	  @   requires range > 0;
 	  @   ensures this.startValue == startValue;
 	  @   ensures this.range == range;
-	  @   assignable this.startValue, this.range;
+	  @   //assignable this.startValue, this.range;
 	  @*/
 	public LookupTableLinear(int startValue, int range) {
 		this.startValue = startValue;

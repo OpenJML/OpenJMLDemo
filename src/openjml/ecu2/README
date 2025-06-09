@@ -1,1 +1,5 @@
 From Wojtek - engine_control example - 10/10/2013
+
+This example originally crashed because of the assignable clauses that included this.
+In particular, this.values[*], at runtime, included a computation of this.values.length in the prestate, which crashed.
+In any case this.values would be undefined in the prestate.
