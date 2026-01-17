@@ -15,6 +15,7 @@ public class InvertInjection {
 		
 		//@ loop_invariant 0<=k && k<=N;
 		//@ loop_invariant (\forall int i; 0<=i && i < k; b[a[i]] == i);
+	    //@ loop_assigns k, b[*];
 		for (int k = 0; k < N; k++) {
 			b[a[k]] = k;
 		}

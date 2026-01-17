@@ -55,6 +55,7 @@ public class EscTest {
         //@ loop_invariant 0<= i && i<=mat.length && mat != null ;
         //@ loop_invariant (\forall int k ; 0 <= k && k < mat.length ; mat[k]!=null ) ;
         //@ loop_invariant (\forall int k ; 0 <= k && k < i ; all_zero( mat[k] ) ) ;
+        //@ loop_assigns mat[*][*], i;
         while(i<mat.length){
             //@ assume (\forall int k ; 0 <= k && k < i ; all_zero( mat[k] ) ) ;
             //@ assert i > 0 ==> all_zero(s);
@@ -77,6 +78,7 @@ public class EscTest {
         int i=0;
         //@ loop_invariant 0<= i && i<=mat.length;
         //@ loop_invariant (\forall int k ; 0 <= k && k < i ; (\forall int l ; 0 <= l && l < mat[k].length ; mat[k][l]==0 ) ) ;
+        //@ loop_assigns mat[*][*], i;
         while(i<mat.length){
             zero_array(mat[i]);
             i++;
